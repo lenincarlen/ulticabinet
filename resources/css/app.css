@@ -1,0 +1,395 @@
+@import 'tailwindcss';
+
+@import "tw-animate-css";
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --font-sans:
+        'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+    /* Default theme colors - can be overridden by site settings */
+    --radius: 0.65rem;
+    --background: #f9fafb;
+    --foreground: oklch(0.141 0.005 285.823);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.141 0.005 285.823);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.141 0.005 285.823);
+    --primary: oklch(0.541 0.281 293.009);
+    --primary-foreground: oklch(0.969 0.016 293.756);
+    --secondary: oklch(0.967 0.001 286.375);
+    --secondary-foreground: oklch(0.21 0.006 285.885);
+    --muted: oklch(0.967 0.001 286.375);
+    --muted-foreground: oklch(0.552 0.016 285.938);
+    --accent: oklch(0.967 0.001 286.375);
+    --accent-foreground: oklch(0.21 0.006 285.885);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.92 0.004 286.32);
+    --input: oklch(0.92 0.004 286.32);
+    --ring: oklch(0.702 0.183 293.541);
+    --chart-1: oklch(0.811 0.111 293.571);
+    --chart-2: oklch(0.606 0.25 292.717);
+    --chart-3: oklch(0.541 0.281 293.009);
+    --chart-4: oklch(0.491 0.27 292.581);
+    --chart-5: oklch(0.432 0.232 292.759);
+    --sidebar: oklch(100% 0.00011 271.152);
+    --sidebar-foreground: oklch(96.8% 0.00409 285.927);
+    --sidebar-primary: oklch(0.541 0.281 293.009);
+    --sidebar-primary-foreground: oklch(0.969 0.016 293.756);
+    --sidebar-accent: oklch(0.967 0.001 286.375);
+    --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
+    --sidebar-border: oklch(0.92 0.004 286.32);
+    --sidebar-ring: oklch(0.702 0.183 293.541);
+
+}
+
+.dark {
+    --background: oklch(0.141 0.005 285.823);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.21 0.006 285.885);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.21 0.006 285.885);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.606 0.25 292.717);
+    --primary-foreground: oklch(0.969 0.016 293.756);
+    --secondary: oklch(0.274 0.006 286.033);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.274 0.006 286.033);
+    --muted-foreground: oklch(0.705 0.015 286.067);
+    --accent: oklch(0.274 0.006 286.033);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.38 0.189 293.745);
+    --chart-1: oklch(0.811 0.111 293.571);
+    --chart-2: oklch(0.606 0.25 292.717);
+    --chart-3: oklch(0.541 0.281 293.009);
+    --chart-4: oklch(0.491 0.27 292.581);
+    --chart-5: oklch(0.432 0.232 292.759);
+    --sidebar: oklch(0.21 0.006 285.885);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.606 0.25 292.717);
+    --sidebar-primary-foreground: oklch(0.969 0.016 293.756);
+    --sidebar-accent: oklch(0.274 0.006 286.033);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.38 0.189 293.745);
+
+}
+
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* React Big Calendar Styles */
+.rbc-calendar {
+    font-family: inherit;
+}
+
+.rbc-header {
+    padding: 8px 4px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+}
+
+.rbc-today {
+    background-color: var(--accent);
+}
+
+.rbc-off-range-bg {
+    background-color: var(--muted);
+    opacity: 0.3;
+}
+
+.rbc-event {
+    padding: 2px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.rbc-event:focus {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+.rbc-toolbar {
+    margin-bottom: 1rem;
+}
+
+.rbc-toolbar button {
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    background: var(--background);
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-sm);
+}
+
+.rbc-toolbar button:hover {
+    background: var(--accent);
+}
+
+.rbc-toolbar button.rbc-active {
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border-color: var(--primary);
+}
+
+.rbc-time-view {
+    border: 1px solid var(--border);
+}
+
+.rbc-time-header-content {
+    border-left: 1px solid var(--border);
+}
+
+.rbc-time-content {
+    border-top: 1px solid var(--border);
+}
+
+.rbc-time-slot {
+    border-top: 1px solid var(--border);
+}
+
+.rbc-day-slot .rbc-time-slot {
+    border-top: 1px solid var(--border);
+}
+
+.rbc-agenda-view table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.rbc-agenda-view table thead>tr>th {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+}
+
+.rbc-agenda-view table tbody>tr>td {
+    padding: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.rbc-agenda-view table tbody>tr:hover {
+    background-color: var(--muted);
+}
+
+/* Sidebar hover expansion estilo Instagram */
+/* Expandir el sidebar como overlay cuando está en hover */
+.sidebar-hover-expanded [data-slot="sidebar"][data-state="collapsed"]>div:nth-child(2) {
+    width: var(--sidebar-width) !important;
+    z-index: 50;
+    transition: width 0.2s ease-in-out;
+}
+
+/* Mantener el gap colapsado para no empujar contenido */
+.sidebar-hover-expanded [data-slot="sidebar"][data-state="collapsed"]>div:first-child {
+    width: calc(var(--sidebar-width-icon) + 1rem) !important;
+}
+
+/* Cuando está en hover, el grupo padre no debe aplicar reglas de colapsado */
+[data-hover-mode="true"][data-state="collapsed"][data-collapsible="icon"] {
+    --sidebar-hover-active: 1;
+}
+
+/* Mostrar contenido del sidebar */
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="content"] {
+    overflow: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* Mostrar labels de grupo */
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="group-label"] {
+    opacity: 1 !important;
+    margin-top: 0 !important;
+    pointer-events: auto !important;
+    user-select: auto !important;
+    height: 2rem !important;
+}
+
+/* Mostrar acciones de grupo */
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="group-action"] {
+    display: flex !important;
+}
+
+/* Restaurar botones del menú a tamaño completo */
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-button"] {
+    width: 100% !important;
+    padding: 0.5rem 0.75rem !important;
+    height: auto !important;
+    min-height: 2.5rem !important;
+    justify-content: flex-start !important;
+    gap: 0.75rem !important;
+}
+
+/* Mostrar texto en los botones - usar selector universal para sobrescribir */
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-button"] span {
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-width: none !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    flex: 1 1 auto !important;
+}
+
+/* Mostrar iconos ChevronRight */
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-button"] svg:last-of-type {
+    display: block !important;
+    opacity: 1 !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+}
+
+/* Mostrar submenús */
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-sub"] {
+    display: block !important;
+    padding-left: 0 !important;
+}
+
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-sub-item"] {
+    display: list-item !important;
+    list-style: none !important;
+}
+
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-sub-button"] {
+    display: flex !important;
+    padding-left: 2.5rem !important;
+    width: 100% !important;
+}
+
+/* Mostrar badges y separadores */
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-badge"],
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-separator"] {
+    display: block !important;
+}
+
+/* Asegurar que los iconos sean visibles */
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-button"]>svg:first-of-type {
+    display: block !important;
+    flex-shrink: 0 !important;
+    width: 1rem !important;
+    height: 1rem !important;
+}
+
+/* Sobrescribir todas las clases group-data-[collapsible=icon] cuando está en hover */
+/* Usar selector de atributo para mayor especificidad */
+[data-hover-mode="true"][data-state="collapsed"][data-collapsible="icon"] *[class*="group-data-[collapsible=icon]:hidden"] {
+    display: block !important;
+}
+
+[data-hover-mode="true"][data-state="collapsed"][data-collapsible="icon"] *[class*="group-data-[collapsible=icon]:opacity-0"] {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    user-select: auto !important;
+}
+
+[data-hover-mode="true"][data-state="collapsed"][data-collapsible="icon"] *[class*="group-data-[collapsible=icon]:overflow-hidden"] {
+    overflow: auto !important;
+}
+
+/* Forzar que los spans dentro de los botones sean visibles */
+[data-hover-mode="true"][data-state="collapsed"][data-collapsible="icon"] [data-sidebar="menu-button"]>span:not(:first-child) {
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: nowrap !important;
+}
+
+/* Ocultar controles y logo de Google Maps en las vistas de técnicos */
+.service-orders-technician .gm-style-cc,
+.service-orders-technician .gm-style-mtc,
+.service-orders-technician .gm-bundled-control,
+.service-orders-technician .gm-fullscreen-control,
+.service-orders-technician .gm-svpc,
+
+.service-orders-technician .gm-ui-hover-effect,
+.service-orders-technician .gm-style-cc div {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Ocultar logo y controles de Google Maps de forma global en mapas compactos */
+.h-32 .gm-style-cc,
+.h-32 .gm-style-mtc,
+.h-32 .gm-bundled-control,
+.h-32 .gm-fullscreen-control,
+.h-32 .gm-svpc,
+.h-32 a[href*="maps.google.com"],
+.h-32 .gm-ui-hover-effect {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}

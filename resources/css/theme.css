@@ -1,0 +1,55 @@
+/* Theme CSS Variables - Applied dynamically from site settings */
+
+/* These variables are set by ThemeProvider component based on site_settings */
+:root {
+    --theme-primary: #3b82f6;
+    --theme-secondary: #8b5cf6;
+    --theme-accent: #10b981;
+    --theme-font: 'Inter', sans-serif;
+}
+
+/* Example usage of theme colors */
+.btn-primary {
+    background-color: var(--theme-primary);
+}
+
+.btn-secondary {
+    background-color: var(--theme-secondary);
+}
+
+.btn-accent {
+    background-color: var(--theme-accent);
+}
+
+.text-primary {
+    color: var(--theme-primary);
+}
+
+.text-secondary {
+    color: var(--theme-secondary);
+}
+
+.text-accent {
+    color: var(--theme-accent);
+}
+
+.border-primary {
+    border-color: var(--theme-primary);
+}
+
+.bg-primary {
+    background-color: var(--theme-primary);
+}
+
+.bg-secondary {
+    background-color: var(--theme-secondary);
+}
+
+.bg-accent {
+    background-color: var(--theme-accent);
+}
+
+/* Apply theme font family */
+body {
+    font-family: var(--theme-font);
+}
