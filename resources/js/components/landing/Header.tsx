@@ -12,7 +12,7 @@ interface HeaderProps {
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <Link
     href={href}
-    className="text-sm font-medium text-slate-300 transition-colors hover:text-blue-400 hover:shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+    className="text-sm font-bold text-[#1d1d1d]/70 transition-colors hover:text-[#0037ff] hover:bg-[#0037ff]/5 px-3 py-2 rounded-md"
   >
     {children}
   </Link>
@@ -33,34 +33,35 @@ export default function Header({ isAuthenticated, canRegister = true }: HeaderPr
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300 border-b border-transparent",
-        scrolled ? "bg-slate-950/80 backdrop-blur-md border-slate-800/50 shadow-lg" : "bg-transparent"
+        scrolled ? "bg-white/90 backdrop-blur-md border-[#e8e9eb] shadow-sm" : "bg-transparent"
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 relative">
+          <div className="relative">
             <AppLogo />
           </div>
-          <span className="font-bold text-xl tracking-tight text-white group-hover:text-blue-100 transition-colors">
-            Ulti<span className="text-blue-400">Cabinet</span>
-          </span>
+
         </Link>
-        <nav className="hidden items-center gap-8 md:flex">
-          <NavLink href="#about">Nosotros</NavLink>
-          <NavLink href="#services">Soluciones</NavLink>
-          <NavLink href="#pricing">Planes</NavLink>
-          <NavLink href="#reviews">Clientes</NavLink>
-          <NavLink href="#contact">Contacto</NavLink>
+        <nav className="hidden items-center gap-2 md:flex">
+          <NavLink href="/nosotros">Nosotros</NavLink>
+          <NavLink href="/soluciones">Soluciones</NavLink>
+          <NavLink href="/#pricing">Planes</NavLink>
+          <NavLink href="/#reviews">Clientes</NavLink>
+          <NavLink href="/#contact">Contacto</NavLink>
         </nav>
         <div className="flex items-center gap-4">
           {isAuthenticated ? (
-            <Button asChild className="rounded-full bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+            <Button asChild className="rounded-full bg-[#0037ff] px-6 py-2 text-white hover:bg-[#1800ad] shadow-lg shadow-blue-500/20 font-bold">
               <Link href={"/dashboard"}>Panel de Control</Link>
             </Button>
           ) : (
             <>
-              <Button asChild className="rounded-full bg-blue-600/90 px-6 py-2 text-white hover:bg-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.4)] backdrop-blur-sm border border-blue-400/20">
-                <Link href={'/solicitar-demo'}>Solicitar Demo</Link>
+              <Button asChild className="bg-transparent border-2 border-[#1d1d1d] text-[#1d1d1d] hover:bg-[#1d1d1d] hover:text-white uppercase font-bold rounded-full">
+                <Link href={'/solicitar-demo'}>Solicita una Demo</Link>
+              </Button>
+              <Button asChild className="bg-[#0037ff] text-white hover:bg-[#1800ad] uppercase font-bold rounded-full shadow-lg shadow-blue-500/20">
+                <Link href={'/ayuda'}>Ayuda</Link>
               </Button>
             </>
           )}

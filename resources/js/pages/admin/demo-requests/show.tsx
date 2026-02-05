@@ -83,18 +83,18 @@ interface Props {
 }
 
 const statusConfig = {
-    pending: { label: 'New Lead', color: 'bg-gray-500 text-white', icon: AlertCircle },
-    new: { label: 'New Lead', color: 'bg-gray-600 text-white', icon: AlertCircle },
-    quoted: { label: 'Quoted', color: 'bg-gray-500 text-white', icon: FileBarChart },
-    for_preview: { label: 'For Preview', color: 'bg-gray-500 text-white', icon: Clock },
-    previewed: { label: 'Previewed', color: 'bg-gray-500 text-white', icon: CheckCircle2 },
-    sold: { label: 'Sold', color: 'bg-gray-500 text-white', icon: BadgeDollarSignIcon },
-    completed: { label: 'Sold', color: 'bg-gray-500 text-white', icon: BadgeDollarSignIcon }, // Compatibility
-    cancelled: { label: 'Cancelled', color: 'bg-gray-500 text-blue-800', icon: XCircle },
-    lost: { label: 'Lost', color: 'bg-red-100 text-red-800', icon: XCircle },
+    pending: { label: 'Nuevo Lead', color: 'bg-gray-500 text-white', icon: AlertCircle },
+    new: { label: 'Nuevo Lead', color: 'bg-gray-600 text-white', icon: AlertCircle },
+    quoted: { label: 'Presupuestado', color: 'bg-gray-500 text-white', icon: FileBarChart },
+    for_preview: { label: 'Para Preview', color: 'bg-gray-500 text-white', icon: Clock },
+    previewed: { label: 'Presentado', color: 'bg-gray-500 text-white', icon: CheckCircle2 },
+    sold: { label: 'Vendido', color: 'bg-gray-500 text-white', icon: BadgeDollarSignIcon },
+    completed: { label: 'Vendido', color: 'bg-gray-500 text-white', icon: BadgeDollarSignIcon }, // Compatibility
+    cancelled: { label: 'Cancelado', color: 'bg-gray-500 text-blue-800', icon: XCircle },
+    lost: { label: 'Perdido', color: 'bg-red-100 text-red-800', icon: XCircle },
     no_show: { label: 'No Show', color: 'bg-orange-100 text-orange-800', icon: XCircle },
-    confirmed: { label: 'Confirmed', color: 'bg-blue-100 text-blue-800', icon: CheckCircle2 }, // Compatibility
-    in_progress: { label: 'In Progress', color: 'bg-blue-100 text-blue-800', icon: Clock }, // Compatibility
+    confirmed: { label: 'Confirmado', color: 'bg-blue-100 text-blue-800', icon: CheckCircle2 }, // Compatibility
+    in_progress: { label: 'En Proceso', color: 'bg-blue-100 text-blue-800', icon: Clock }, // Compatibility
 };
 
 export default function DemoRequestShow({ demoRequest, staff }: Props) {
@@ -129,7 +129,7 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
             <div className="space-y-6 p-4 md:p-6 max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
                         <Button
                             variant="outline"
                             size="icon"
@@ -164,7 +164,7 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                     </Button>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
                     {/* Left Column - Main Info */}
                     <div className="lg:col-span-2 space-y-6">
 
@@ -193,13 +193,13 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                                                         <SelectValue />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        <SelectItem value="new">New Lead</SelectItem>
-                                                        <SelectItem value="quoted">Quoted</SelectItem>
-                                                        <SelectItem value="for_preview">For Preview</SelectItem>
-                                                        <SelectItem value="previewed">Previewed</SelectItem>
-                                                        <SelectItem value="sold">Sold</SelectItem>
-                                                        <SelectItem value="cancelled">Cancelled - Lost</SelectItem>
-                                                        <SelectItem value="no_show">No Show</SelectItem>
+                                                        <SelectItem value="new">Nuevo Lead </SelectItem>
+                                                        <SelectItem value="quoted">Presupuestado</SelectItem>
+                                                        <SelectItem value="for_preview">Para Preview</SelectItem>
+                                                        <SelectItem value="previewed">Presentado</SelectItem>
+                                                        <SelectItem value="sold">Vendido</SelectItem>
+                                                        <SelectItem value="cancelled">Cancelado</SelectItem>
+                                                        <SelectItem value="no_show">Sin Presentación</SelectItem>
                                                     </SelectContent>
                                                 </Select>
                                             </div>
@@ -288,7 +288,7 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                         )}
 
                         {/* Company & Contact Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                             {/* Company Information */}
                             <Card className="h-full shadow-sm hover:shadow-md transition-shadow">
                                 <CardHeader className="pb-3 border-b">

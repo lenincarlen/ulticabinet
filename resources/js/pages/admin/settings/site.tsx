@@ -322,6 +322,49 @@ export default function SiteSettings({ settings }: Props) {
                 );
 
             default:
+                if (setting.key === 'hero_background_color' || setting.key === 'landing_hero_background_color') {
+                    const gradientOptions = [
+                        { label: 'Azul Tecnológico', value: 'from-slate-900 via-blue-900 to-slate-900' },
+                        { label: 'Oscuro Profundo', value: 'from-gray-900 via-gray-800 to-gray-900' },
+                        { label: 'Indigo Vibrante', value: 'from-indigo-900 via-purple-900 to-indigo-900' },
+                        { label: 'Verde Cibernético', value: 'from-slate-900 via-emerald-900 to-slate-900' },
+                    ];
+
+                    return (
+                        <div className="space-y-3">
+                            <Select
+                                value={gradientOptions.find(o => o.value === value)?.value || 'custom'}
+                                onValueChange={(val) => {
+                                    if (val !== 'custom') handleInputChange(setting.key, val);
+                                }}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Seleccionar tema de color" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {gradientOptions.map((opt) => (
+                                        <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                                    ))}
+                                    <SelectItem value="custom">Personalizado</SelectItem>
+                                </SelectContent>
+                            </Select>
+
+                            <Input
+                                type="text"
+                                value={value}
+                                onChange={(e) => handleInputChange(setting.key, e.target.value)}
+                                placeholder="from-slate-900 via-blue-900 to-slate-900"
+                                className="font-mono text-xs"
+                            />
+
+                            <div className="rounded-lg p-4 border border-border">
+                                <p className="text-xs text-muted-foreground mb-2">Vista previa:</p>
+                                <div className={`h-20 w-full rounded bg-gradient-to-br ${value || 'from-slate-900 via-blue-900 to-slate-900'}`} />
+                            </div>
+                        </div>
+                    );
+                }
+
                 return (
                     <Input
                         type="text"
@@ -460,7 +503,7 @@ export default function SiteSettings({ settings }: Props) {
                                         </p>
                                     </div>
                                     <div className="p-8 space-y-8">
-                                        {settings.landing?.map((setting) => (
+                                        {settings.landing?.filter(s => !s.key.startsWith('offer_')).map((setting) => (
                                             <div key={setting.id} className="flex gap-8">
                                                 <div className="w-64 flex-shrink-0 pt-2">
                                                     <Label htmlFor={setting.key} className="text-base font-medium leading-5">

@@ -56,7 +56,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'staff_id' => 'required|uuid|exists:staff,id|unique:users,staff_id',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => [
                 'required',
@@ -69,27 +69,18 @@ class UserController extends Controller
             'role' => 'required|string|exists:roles,name',
             'is_active' => 'boolean',
         ], [
-            'staff_id.required' => 'Debe seleccionar un empleado.',
-            'staff_id.unique' => 'Este empleado ya tiene una cuenta de usuario.',
+            'name.required' => 'El nombre es requerido.',
+            'email.required' => 'El email es requerido.',
+            'email.unique' => 'Este email ya está registrado.',
             'password.required' => 'La contraseña es requerida.',
             'role.required' => 'Debe seleccionar un rol.',
         ]);
 
-        // Obtener información del staff
-        $staff = Staff::findOrFail($validated['staff_id']);
-
-        // Validar que el email coincida con el email del staff
-        if ($validated['email'] !== $staff->email) {
-            return back()->withErrors([
-                'email' => 'El email debe coincidir con el email del empleado: ' . $staff->email
-            ]);
-        }
-
-        // Crear el usuario (name viene automáticamente del accessor en el modelo)
+        // Crear el usuario
         $user = User::create([
-            'email' => $staff->email, // Usar el email del staff
+            'name' => $validated['name'],
+            'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'staff_id' => $validated['staff_id'],
             'is_active' => $validated['is_active'] ?? true,
             'email_verified_at' => now(),
         ]);
@@ -137,6 +128,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
+            'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'password' => [
                 'nullable',
@@ -149,18 +141,11 @@ class UserController extends Controller
             'role' => 'required|string|exists:roles,name',
             'is_active' => 'boolean',
         ], [
+            'name.required' => 'El nombre es requerido.',
             'role.required' => 'Debe seleccionar un rol.',
         ]);
 
-        // Si tiene staff, validar que el email coincida
-        if ($user->staff_id && $user->staff) {
-            if ($validated['email'] !== $user->staff->email) {
-                return back()->withErrors([
-                    'email' => 'El email debe coincidir con el email del empleado: ' . $user->staff->email
-                ]);
-            }
-        }
-
+        $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->is_active = $validated['is_active'] ?? $user->is_active;
 

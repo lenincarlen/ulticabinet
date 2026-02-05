@@ -28,7 +28,7 @@ const services = [
 
 export default function ServiceCategories() {
   return (
-    <section id="services" className="w-full py-12 md:py-24 lg:py-32 bg-slate-900 overflow-hidden relative">
+    <section id="services" className="w-full py-12 md:py-24 lg:py-32 bg-white overflow-hidden relative">
       <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
         <div className="text-center">
           <motion.h2
@@ -36,7 +36,7 @@ export default function ServiceCategories() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-2xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl"
+            className="text-2xl font-black tracking-tighter text-[#1d1d1d] sm:text-4xl md:text-5xl"
           >
             Nuestras Soluciones
           </motion.h2>
@@ -45,7 +45,7 @@ export default function ServiceCategories() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-[700px] text-lg text-slate-400"
+            className="mx-auto mt-4 max-w-[700px] text-lg text-[#1d1d1d]/70 font-medium"
           >
             Una suite completa de herramientas para la transformación digital de corporaciones y gobiernos.
           </motion.p>
@@ -61,23 +61,23 @@ export default function ServiceCategories() {
               whileHover={{ scale: 1.05, y: -5 }}
             >
               <Card
-                className={`h-full flex cursor-pointer flex-col items-center justify-center gap-3 p-6 transition-all shadow-md group border-slate-800 ${service.highlighted
-                    ? "bg-blue-900/20 border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]"
-                    : "bg-slate-900/50 hover:bg-slate-800 hover:shadow-lg"
-                  } backdrop-blur-sm`}
+                className={`h-full flex cursor-pointer flex-col items-center justify-center gap-3 p-6 transition-all shadow-md group border-[#e8e9eb] ${service.highlighted
+                  ? "bg-[#0037ff]/5 border-[#0037ff]/20 hover:shadow-xl hover:shadow-[#0037ff]/20"
+                  : "bg-white hover:bg-[#e8e9eb] hover:shadow-lg"
+                  }`}
               >
                 <div className={`p-3 rounded-full transition-colors ${service.highlighted
-                    ? "bg-blue-500/20 group-hover:bg-blue-500/30"
-                    : "bg-slate-800 group-hover:bg-slate-700"
+                  ? "bg-[#0037ff]/10 group-hover:bg-[#0037ff]/20"
+                  : "bg-[#e8e9eb] group-hover:bg-white"
                   }`}>
                   <service.icon className={`h-8 w-8 ${service.highlighted
-                      ? "text-blue-400 group-hover:text-blue-300"
-                      : "text-slate-400 group-hover:text-slate-200"
+                    ? "text-[#0037ff] group-hover:text-[#0037ff]"
+                    : "text-[#1d1d1d]/60 group-hover:text-[#1d1d1d]"
                     } transition-colors`} />
                 </div>
-                <p className={`text-sm font-medium text-center ${service.highlighted
-                    ? "text-blue-200 group-hover:text-blue-100"
-                    : "text-slate-300 group-hover:text-white"
+                <p className={`text-sm font-bold text-center ${service.highlighted
+                  ? "text-[#0037ff]"
+                  : "text-[#1d1d1d]/70 group-hover:text-[#1d1d1d]"
                   } transition-colors`}>
                   {service.name}
                 </p>

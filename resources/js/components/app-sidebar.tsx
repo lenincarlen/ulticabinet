@@ -27,6 +27,7 @@ import AppLogo from './app-logo';
 import { type SharedData } from '@/types';
 import { useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { title } from 'process';
 
 // Definir items del menú con roles permitidos
 interface NavItemWithRoles extends NavItem {
@@ -56,33 +57,18 @@ const allNavItems: NavItemWithRoles[] = [
         ],
     },
     {
-        title: 'Solicitudes',
+        title: 'Leads',
         href: '#',
         icon: Calendar1Icon,
         allowedRoles: ['admin', 'operador'],
         items: [
             {
-                title: "Leads New",
+                title: "Leads Management",
                 url: "/admin/demo-requests?status=new",
             },
+           
             {
-                title: "Quoted",
-                url: "/admin/demo-requests?status=quoted",
-            },
-            {
-                title: "For preview",
-                url: "/admin/demo-requests?status=for_preview",
-            },
-            {
-                title: "Previewed",
-                url: "/admin/demo-requests?status=previewed",
-            },
-            {
-                title: "Sold",
-                url: "/admin/demo-requests?status=sold",
-            },
-            {
-                title: "Cancelled - Lost",
+                title: "Canceladas - Lost",
                 url: "/admin/demo-requests?status=cancelled",
             },
         ],
@@ -113,8 +99,28 @@ const allNavItems: NavItemWithRoles[] = [
             },
         ],
     },
-
-
+    {
+        title: "Blog",
+        href: "/admin/posts",
+        icon: BookOpen,
+        allowedRoles: ['admin'],
+        items: [
+            {
+                title: "Entradas",
+                url: "/admin/posts",
+            },
+            {
+                title: "Nueva Entrada",
+                url: "/admin/posts/create",
+            },
+        ],
+    },
+    {
+        title: "Soluciones",
+        href: "/admin/solutions",
+        icon: Users,
+        allowedRoles: ['admin'],
+    },
     {
         title: "Servicios",
         href: "/admin/services",
@@ -122,7 +128,7 @@ const allNavItems: NavItemWithRoles[] = [
         allowedRoles: ['admin'],
     },
     {
-        title: 'Usuarios y roles',
+        title: 'Usuarios',
         href: '/admin/users',
         icon: Users,
         allowedRoles: ['admin'],

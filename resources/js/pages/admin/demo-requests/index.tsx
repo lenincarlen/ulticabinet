@@ -6,6 +6,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '@/components/ui/table';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
     Calendar,
     Building2,
     Mail,
@@ -18,7 +34,10 @@ import {
     Download,
     Search,
     BadgeDollarSignIcon,
-    FileBarChart
+    FileBarChart,
+    MoreHorizontal,
+    Eye,
+    Filter
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -77,18 +96,18 @@ interface Props {
 }
 
 const statusConfig = {
-    pending: { label: 'New Lead', color: 'bg-yellow-100 text-yellow-800', icon: AlertCircle },
-    new: { label: 'New Lead', color: 'bg-yellow-100 text-yellow-800', icon: AlertCircle },
-    quoted: { label: 'Quoted', color: 'bg-purple-100 text-purple-800', icon: FileBarChart },
-    for_preview: { label: 'For Preview', color: 'bg-indigo-100 text-indigo-800', icon: Clock },
-    previewed: { label: 'Previewed', color: 'bg-teal-100 text-teal-800', icon: CheckCircle2 },
-    sold: { label: 'Sold', color: 'bg-green-100 text-green-800', icon: BadgeDollarSignIcon },
-    completed: { label: 'Sold', color: 'bg-green-100 text-green-800', icon: BadgeDollarSignIcon }, // Compatibility
-    cancelled: { label: 'Cancelled', color: 'bg-red-100 text-red-800', icon: XCircle },
-    lost: { label: 'Lost', color: 'bg-red-100 text-red-800', icon: XCircle },
-    no_show: { label: 'No Show', color: 'bg-orange-100 text-orange-800', icon: XCircle },
-    confirmed: { label: 'Confirmed', color: 'bg-blue-100 text-blue-800', icon: CheckCircle2 }, // Compatibility
-    in_progress: { label: 'In Progress', color: 'bg-blue-100 text-blue-800', icon: Clock }, // Compatibility
+    pending: { label: 'New Lead', color: 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200', icon: AlertCircle },
+    new: { label: 'Nuevo Lead', color: 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200', icon: AlertCircle },
+    quoted: { label: 'Presupuestado', color: 'bg-purple-100 text-purple-800 hover:bg-purple-200', icon: FileBarChart },
+    for_preview: { label: 'Para Preview', color: 'bg-indigo-100 text-indigo-800 hover:bg-indigo-200', icon: Clock },
+    previewed: { label: 'Presentado', color: 'bg-teal-100 text-teal-800 hover:bg-teal-200', icon: CheckCircle2 },
+    sold: { label: 'Vendido', color: 'bg-green-100 text-green-800 hover:bg-green-200', icon: BadgeDollarSignIcon },
+    completed: { label: 'Vendido', color: 'bg-green-100 text-green-800 hover:bg-green-200', icon: BadgeDollarSignIcon },
+    cancelled: { label: 'Cancelado', color: 'bg-red-100 text-red-800 hover:bg-red-200', icon: XCircle },
+    lost: { label: 'Perdido', color: 'bg-red-100 text-red-800 hover:bg-red-200', icon: XCircle },
+    no_show: { label: 'Sin Presentación', color: 'bg-orange-100 text-orange-800 hover:bg-orange-200', icon: XCircle },
+    confirmed: { label: 'Confirmado', color: 'bg-blue-100 text-blue-800 hover:bg-blue-200', icon: CheckCircle2 },
+    in_progress: { label: 'En Proceso', color: 'bg-blue-100 text-blue-800 hover:bg-blue-200', icon: Clock },
 };
 
 export default function DemoRequestsIndex({ demoRequests, solutions, staff, stats, filters }: Props) {
@@ -96,118 +115,114 @@ export default function DemoRequestsIndex({ demoRequests, solutions, staff, stat
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        window.location.href = `/admin/demo-requests?search=${searchTerm}`;
+        updateParams({ search: searchTerm });
     };
 
     const handleFilterChange = (key: string, value: string) => {
+        updateParams({ [key]: value === 'all' ? '' : value });
+    };
+
+    const updateParams = (newParams: Record<string, string>) => {
         const params = new URLSearchParams(window.location.search);
-        if (value && value !== 'all') {
-            params.set(key, value);
-        } else {
-            params.delete(key);
-        }
+        Object.entries(newParams).forEach(([key, value]) => {
+            if (value) {
+                params.set(key, value);
+            } else {
+                params.delete(key);
+            }
+        });
         window.location.href = `/admin/demo-requests?${params.toString()}`;
     };
 
     return (
         <AppLayout>
-            <Head title="Lead Management" />
+            <Head title="Gestión de Leads" />
 
-            <div className="space-y-6 p-4 md:p-6">
-                {/* Header */}
-                <div className="flex items-center justify-between">
+            <div className="space-y-6 p-6">
+                {/* Header Section */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900">Lead Management</h1>
-                        <p className="text-gray-600 mt-1">Track and manage potential clients through the sales funnel.</p>
+                        <h1 className="text-2xl font-bold tracking-tight">Gestión de Leads</h1>
+                        <p className="text-muted-foreground">Administra y da seguimiento a tus oportunidades de venta.</p>
                     </div>
-                    <Button variant="outline" onClick={() => window.location.href = '/admin/demo-requests/export/data'}>
-                        <Download className="h-4 w-4 mr-2" />
-                        Export Data
-                    </Button>
+                    <div className="flex items-center gap-2">
+                        <Button variant="outline" size="sm" onClick={() => window.location.href = '/admin/demo-requests/export/data'}>
+                            <Download className="h-4 w-4 mr-2" />
+                            Exportar
+                        </Button>
+                    </div>
                 </div>
 
-                {/* Stats Cards */}
-                <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
-                    <Card className='p-3'>
-                        <CardHeader className="pb-2 p-3">
-                            <CardDescription className="text-xs">Total Leads</CardDescription>
-                            <CardTitle className="text-2xl">{stats.total}</CardTitle>
-                        </CardHeader>
-                    </Card>
-                    <Card className='p-3 border-l-4 border-l-yellow-400'>
-                        <CardHeader className="pb-2 p-3">
-                            <CardDescription className="text-xs">New Leads</CardDescription>
-                            <CardTitle className="text-2xl">{stats.pending}</CardTitle>
-                        </CardHeader>
-                    </Card>
-                    <Card className='p-3 border-l-4 border-l-purple-400'>
-                        <CardHeader className="pb-2 p-3">
-                            <CardDescription className="text-xs">Quoted</CardDescription>
-                            <CardTitle className="text-2xl">{stats.quoted || 0}</CardTitle>
-                        </CardHeader>
-                    </Card>
-                    <Card className='p-3 border-l-4 border-l-indigo-400'>
-                        <CardHeader className="pb-2 p-3">
-                            <CardDescription className="text-xs">For Preview</CardDescription>
-                            <CardTitle className="text-2xl">{stats.for_preview || 0}</CardTitle>
-                        </CardHeader>
-                    </Card>
-                    <Card className='p-3 border-l-4 border-l-green-400'>
-                        <CardHeader className="pb-2 p-3">
-                            <CardDescription className="text-xs">Sold</CardDescription>
-                            <CardTitle className="text-2xl">{stats.sold || stats.completed}</CardTitle>
-                        </CardHeader>
-                    </Card>
-                    <Card className='p-3 border-l-4 border-l-red-400'>
-                        <CardHeader className="pb-2 p-3">
-                            <CardDescription className="text-xs">Lost/Cancel</CardDescription>
-                            <CardTitle className="text-2xl">{stats.cancelled}</CardTitle>
-                        </CardHeader>
-                    </Card>
+                {/* KPI Cards */}
+                <div className="grid grid-cols-2 lg:grid-cols-6 gap-px bg-border border rounded-lg overflow-hidden">
+                    <div className="bg-background p-4 flex flex-col justify-center">
+                        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Total Leads</span>
+                        <div className="text-2xl font-bold mt-1">{stats.total}</div>
+                    </div>
+                    <div className="bg-background p-4 border-l border-border/50  flex flex-col justify-center">
+                        <span className="text-xs font-medium text-yellow-600 uppercase tracking-wider">Nuevos</span>
+                        <div className="text-2xl font-bold mt-1">{stats.pending}</div>
+                    </div>
+                    <div className="bg-background p-4 flex flex-col justify-center">
+                        <span className="text-xs font-medium text-purple-600 uppercase tracking-wider">Presupuestados</span>
+                        <div className="text-2xl font-bold mt-1">{stats.quoted || 0}</div>
+                    </div>
+                    <div className="bg-background p-4 flex flex-col justify-center">
+                        <span className="text-xs font-medium text-indigo-600 uppercase tracking-wider">Para Preview</span>
+                        <div className="text-2xl font-bold mt-1">{stats.for_preview || 0}</div>
+                    </div>
+                    <div className="bg-background p-4 flex flex-col justify-center">
+                        <span className="text-xs font-medium text-green-600 uppercase tracking-wider">Vendidos</span>
+                        <div className="text-2xl font-bold mt-1">{stats.sold || stats.completed}</div>
+                    </div>
+                    <div className="bg-background p-4 flex flex-col justify-center">
+                        <span className="text-xs font-medium text-red-600 uppercase tracking-wider">Perdidos</span>
+                        <div className="text-2xl font-bold mt-1">{stats.cancelled}</div>
+                    </div>
                 </div>
 
-                {/* Filters */}
-                <Card className='p-3'>
+                {/* Main Content Card */}
+                <Card className="shadow-sm border-none ring-1 ring-black/5">
+                    <div className="p-4 border-b flex flex-col sm:flex-row items-center justify-between gap-4">
+                        {/* Search Bar */}
+                        <form onSubmit={handleSearch} className="relative w-full sm:w-80">
+                            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                            <Input
+                                placeholder="Buscar por empresa, contacto, email..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="pl-9 h-9"
+                            />
+                        </form>
 
-                    <CardContent>
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                            {/* Search */}
-                            <form onSubmit={handleSearch} className="flex gap-2">
-                                <Input
-                                    placeholder="Buscar..."
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                />
-                                <Button type="submit" size="icon">
-                                    <Search className="h-4 w-4" />
-                                </Button>
-                            </form>
-
-                            {/* Status Filter */}
+                        {/* Filters Toolbar */}
+                        <div className="flex items-center gap-2 w-full sm:w-auto">
                             <Select
                                 value={filters.status || 'all'}
                                 onValueChange={(value) => handleFilterChange('status', value)}
                             >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Status" />
+                                <SelectTrigger className="h-9 w-[180px]">
+                                    <div className="flex items-center gap-2">
+                                        <Filter className="h-3.5 w-3.5 text-muted-foreground" />
+                                        <SelectValue placeholder="Estado" />
+                                    </div>
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="all">All Statuses</SelectItem>
-                                    <SelectItem value="new">New Lead</SelectItem>
-                                    <SelectItem value="quoted">Quoted</SelectItem>
-                                    <SelectItem value="for_preview">For Preview</SelectItem>
-                                    <SelectItem value="previewed">Previewed</SelectItem>
-                                    <SelectItem value="sold">Sold</SelectItem>
-                                    <SelectItem value="cancelled">Cancelled - Lost</SelectItem>
+                                    <SelectItem value="all">Todos los estados</SelectItem>
+                                    <SelectItem value="new">Nuevo Lead</SelectItem>
+                                    <SelectItem value="quoted">Presupuestado</SelectItem>
+                                    <SelectItem value="for_preview">Para Preview</SelectItem>
+                                    <SelectItem value="previewed">Presentado</SelectItem>
+                                    <SelectItem value="sold">Vendido</SelectItem>
+                                    <SelectItem value="cancelled">Cancelado</SelectItem>
                                 </SelectContent>
                             </Select>
 
-                            {/* Solution Filter */}
                             <Select
                                 value={filters.solution_id || 'all'}
                                 onValueChange={(value) => handleFilterChange('solution_id', value)}
                             >
-                                <SelectTrigger>
+                                <SelectTrigger className="h-9 w-[180px]">
                                     <SelectValue placeholder="Solución" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -219,132 +234,124 @@ export default function DemoRequestsIndex({ demoRequests, solutions, staff, stat
                                     ))}
                                 </SelectContent>
                             </Select>
-
-                            {/* Assigned To Filter (REMOVED) */}
-                            {/* 
-                            <Select
-                                value={filters.assigned_to || 'all'}
-                                onValueChange={(value) => handleFilterChange('assigned_to', value)}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Asignado a" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="all">Todos</SelectItem>
-                                    {staff.map((member) => (
-                                        <SelectItem key={member.id} value={member.id.toString()}>
-                                            {member.name}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select> 
-                            */}
                         </div>
-                    </CardContent>
-                </Card>
+                    </div>
 
-                {/* Requests List */}
-                <Card className='p-3'>
-                    <CardHeader>
-                        <CardTitle>Solicitudes ({demoRequests.total})</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        {demoRequests.data.length === 0 ? (
-                            <div className="text-center py-12">
-                                <Calendar className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                                <p className="text-gray-600">No hay solicitudes de demo</p>
-                            </div>
-                        ) : (
-                            <div className="space-y-4">
-                                {demoRequests.data.map((request) => {
-                                    // Fallback for unknown statuses
-                                    const statusInfo = statusConfig[request.status as keyof typeof statusConfig] || statusConfig.pending;
-                                    const StatusIcon = statusInfo.icon;
+                    <div className="relative w-full overflow-auto p-2">
+                        <Table>
+                            <TableHeader>
+                                <TableRow className="  hover:bg-muted/50">
+                                    <TableHead className="w-[160px] px-4"># ID</TableHead>
+                                    <TableHead className="w-[200px]">Empresa</TableHead>
+                                    <TableHead>Contacto</TableHead>
+                                    <TableHead>Solución</TableHead>
+                                    <TableHead>Estado</TableHead>
+                                    <TableHead className="hidden md:table-cell">Fecha</TableHead>
+                                    <TableHead className="text-right">Acciones</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {demoRequests.data.length === 0 ? (
+                                    <TableRow>
+                                        <TableCell colSpan={7} className="h-24 text-center">
+                                            No se encontraron resultados.
+                                        </TableCell>
+                                    </TableRow>
+                                ) : (
+                                    demoRequests.data.map((request) => {
+                                        const statusInfo = statusConfig[request.status as keyof typeof statusConfig] || statusConfig.pending;
+                                        const StatusIcon = statusInfo.icon;
 
-                                    return (
-                                        <div
-                                            key={request.id}
-                                            className="border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                                            onClick={() => window.location.href = `/admin/demo-requests/${request.id}`}
-                                        >
-                                            <div className="flex items-start justify-between">
-                                                <div className="flex-1">
-                                                    <div className="flex items-center gap-3 mb-2">
-                                                        <h3 className="font-semibold text-lg">{request.company_name}</h3>
-                                                        <Badge className={statusInfo.color}>
-                                                            <StatusIcon className="h-3 w-3 mr-1" />
-                                                            {statusInfo.label}
-                                                        </Badge>
-                                                        <span className="text-sm text-gray-500">#{request.request_number}</span>
+                                        return (
+                                            <TableRow key={request.id} className="hover:bg-muted/50 cursor-pointer" onClick={() => window.location.href = `/admin/demo-requests/${request.id}`}>
+                                                <TableCell className="font-mono text-xs font-medium text-muted-foreground px-4">
+                                                    #{request.request_number}
+                                                </TableCell>
+                                                <TableCell>
+                                                    <div className="font-medium text-gray-900">{request.company_name}</div>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <div className="flex flex-col">
+                                                        <span className="text-sm font-medium">{request.contact_name}</span>
+                                                        <span className="text-xs text-muted-foreground">{request.contact_email}</span>
                                                     </div>
-
-                                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                                                        <div className="flex items-center gap-2 text-gray-600">
-                                                            <User className="h-4 w-4" />
-                                                            {request.contact_name}
-                                                        </div>
-                                                        <div className="flex items-center gap-2 text-gray-600">
-                                                            <Mail className="h-4 w-4" />
-                                                            {request.contact_email}
-                                                        </div>
-                                                        <div className="flex items-center gap-2 text-gray-600">
-                                                            <Phone className="h-4 w-4" />
-                                                            {request.contact_phone}
-                                                        </div>
-                                                        <div className="flex items-center gap-2 text-gray-600">
-                                                            <Building2 className="h-4 w-4" />
+                                                </TableCell>
+                                                <TableCell>
+                                                    <div className="flex items-center gap-2">
+                                                        <Badge variant="outline" className="font-normal">
                                                             {request.solution.name}
-                                                        </div>
+                                                        </Badge>
                                                     </div>
-
-                                                    <div className="flex items-center gap-4 mt-3 text-sm text-gray-500">
-                                                        <span>Creado: {new Date(request.created_at).toLocaleDateString('es-ES')}</span>
-                                                        {request.scheduled_at && (
-                                                            <span className="flex items-center gap-1">
-                                                                <Calendar className="h-4 w-4" />
-                                                                Agendado: {new Date(request.scheduled_at).toLocaleDateString('es-ES')}
-                                                            </span>
-                                                        )}
-                                                        {/* 
-                                                        {request.assigned_staff && (
-                                                            <span>Asignado a: {request.assigned_staff.name}</span>
-                                                        )} 
-                                                        */}
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Badge variant="secondary" className={`pl-1.5 pr-2.5 py-0.5 border-0 font-medium ${statusInfo.color}`}>
+                                                        <StatusIcon className="h-3.5 w-3.5 mr-1" />
+                                                        {statusInfo.label}
+                                                    </Badge>
+                                                </TableCell>
+                                                <TableCell className="hidden md:table-cell text-muted-foreground text-sm">
+                                                    <div className="flex items-center gap-1">
+                                                        <Calendar className="h-3.5 w-3.5" />
+                                                        {new Date(request.created_at).toLocaleDateString('es-ES')}
                                                     </div>
-                                                </div>
+                                                </TableCell>
+                                                <TableCell className="text-right">
+                                                    <DropdownMenu>
+                                                        <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                                                            <Button variant="ghost" className="h-8 w-8 p-0">
+                                                                <span className="sr-only">Abrir menú</span>
+                                                                <MoreHorizontal className="h-4 w-4" />
+                                                            </Button>
+                                                        </DropdownMenuTrigger>
+                                                        <DropdownMenuContent align="end">
+                                                            <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                                                            <DropdownMenuItem onClick={() => window.location.href = `/admin/demo-requests/${request.id}`}>
+                                                                <Eye className="mr-2 h-4 w-4" /> Ver detalles
+                                                            </DropdownMenuItem>
+                                                            <DropdownMenuSeparator />
+                                                            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(request.contact_email)}>
+                                                                <Mail className="mr-2 h-4 w-4" /> Copiar Email
+                                                            </DropdownMenuItem>
+                                                        </DropdownMenuContent>
+                                                    </DropdownMenu>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })
+                                )}
+                            </TableBody>
+                        </Table>
+                    </div>
 
-                                                <Button variant="outline" size="sm">
-                                                    Ver Detalles
-                                                </Button>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
+                    {/* Footer Pagination */}
+                    {demoRequests.last_page > 1 && (
+                        <div className="p-4 border-t flex items-center justify-between">
+                            <div className="text-sm text-muted-foreground">
+                                Mostrando {((demoRequests.current_page - 1) * demoRequests.per_page) + 1} a {Math.min(demoRequests.current_page * demoRequests.per_page, demoRequests.total)} de {demoRequests.total} resultados
                             </div>
-                        )}
-
-                        {/* Pagination */}
-                        {demoRequests.last_page > 1 && (
-                            <div className="flex items-center justify-center gap-2 mt-6">
-                                {Array.from({ length: demoRequests.last_page }, (_, i) => i + 1).map((page) => (
-                                    <Button
-                                        key={page}
-                                        variant={page === demoRequests.current_page ? 'default' : 'outline'}
-                                        size="sm"
-                                        onClick={() => {
-                                            const params = new URLSearchParams(window.location.search);
-                                            params.set('page', page.toString());
-                                            window.location.href = `/admin/demo-requests?${params.toString()}`;
-                                        }}
-                                    >
-                                        {page}
-                                    </Button>
-                                ))}
+                            <div className="flex items-center gap-2">
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => updateParams({ page: (demoRequests.current_page - 1).toString() })}
+                                    disabled={demoRequests.current_page === 1}
+                                >
+                                    Anterior
+                                </Button>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => updateParams({ page: (demoRequests.current_page + 1).toString() })}
+                                    disabled={demoRequests.current_page === demoRequests.last_page}
+                                >
+                                    Siguiente
+                                </Button>
                             </div>
-                        )}
-                    </CardContent>
+                        </div>
+                    )}
                 </Card>
             </div>
         </AppLayout>
     );
 }
+

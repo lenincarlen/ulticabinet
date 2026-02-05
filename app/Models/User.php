@@ -20,6 +20,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'name',
         'email',
         'password',
         'staff_id',
@@ -82,35 +83,5 @@ class User extends Authenticatable
     public function staff()
     {
         return $this->belongsTo(Staff::class, 'staff_id');
-    }
-
-    /**
-     * Get the name from the associated staff member.
-     * This accessor ensures we always get the name from staff, not from user.
-     */
-    public function getNameAttribute()
-    {
-        if ($this->staff) {
-            return $this->staff->name;
-        }
-        // Fallback para usuarios sin staff (si aplica en el futuro)
-        return $this->attributes['email'] ?? '';
-    }
-
-    /**
-     * Boot method to validate email matches staff email when staff_id exists.
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saving(function ($user) {
-            if ($user->staff_id && $user->staff) {
-                // Si hay staff_id, el email debe coincidir con staff.email
-                if ($user->email !== $user->staff->email) {
-                    $user->email = $user->staff->email;
-                }
-            }
-        });
     }
 }

@@ -9,9 +9,24 @@ interface Particle {
     size: number;
 }
 
-export default function ParticlesBackground() {
+interface ParticlesProps {
+    color?: string; // Hex color for particles
+}
+
+export default function ParticlesBackground({ color = '#063870ff' }: ParticlesProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const mouseRef = useRef({ x: 0, y: 0 });
+
+    // Helper to convert hex to rgb
+    const hexToRgb = (hex: string) => {
+        // Handle 6 or 8 digit hex
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})(?:[a-f\d]{2})?$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : { r: 6, g: 56, b: 112 }; // Default to dark blue if invalid
+    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -20,6 +35,7 @@ export default function ParticlesBackground() {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
+        const rgb = hexToRgb(color);
         let particles: Particle[] = [];
         let animationFrameId: number;
 
@@ -30,7 +46,7 @@ export default function ParticlesBackground() {
         };
 
         const initParticles = () => {
-            const particleCount = Math.min(Math.floor(window.innerWidth * 0.1), 100); // Responsive count
+            const particleCount = Math.min(Math.floor(window.innerWidth * 0.1), 80); // Responsive count
             particles = [];
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
@@ -67,7 +83,7 @@ export default function ParticlesBackground() {
 
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(147, 197, 253, 0.5)'; // blue-300 with opacity
+                ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.4)`; // Opacity increased to 0.4
                 ctx.fill();
 
                 // Draw connections
@@ -79,7 +95,7 @@ export default function ParticlesBackground() {
 
                     if (dist < 150) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(147, 197, 253, ${0.2 * (1 - dist / 150)})`;
+                        ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${0.25 * (1 - dist / 150)})`; // Opacity increased to 0.25
                         ctx.lineWidth = 1;
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
@@ -110,7 +126,7 @@ export default function ParticlesBackground() {
             window.removeEventListener('mousemove', handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [color]);
 
     return (
         <canvas

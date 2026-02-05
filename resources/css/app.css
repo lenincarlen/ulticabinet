@@ -87,18 +87,17 @@
     --chart-3: oklch(0.541 0.281 293.009);
     --chart-4: oklch(0.491 0.27 292.581);
     --chart-5: oklch(0.432 0.232 292.759);
-    --sidebar: oklch(100% 0.00011 271.152);
-    --sidebar-foreground: oklch(96.8% 0.00409 285.927);
+    --sidebar:  oklch(00.97 0.000 260.02);
+    --sidebar-foreground: oklch(0.141 0.005 285.823);
     --sidebar-primary: oklch(0.541 0.281 293.009);
     --sidebar-primary-foreground: oklch(0.969 0.016 293.756);
     --sidebar-accent: oklch(0.967 0.001 286.375);
     --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
     --sidebar-border: oklch(0.92 0.004 286.32);
     --sidebar-ring: oklch(0.702 0.183 293.541);
-
-}
-
-.dark {
+  }
+  
+  .dark {
     --background: oklch(0.141 0.005 285.823);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.21 0.006 285.885);
@@ -130,9 +129,8 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.38 0.189 293.745);
-
-}
-
+  }
+  
 
 @layer base {
     * {
@@ -222,32 +220,32 @@
     border-collapse: collapse;
 }
 
-.rbc-agenda-view table thead>tr>th {
+.rbc-agenda-view table thead > tr > th {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid var(--border);
     font-weight: 600;
 }
 
-.rbc-agenda-view table tbody>tr>td {
+.rbc-agenda-view table tbody > tr > td {
     padding: 8px;
     border-bottom: 1px solid var(--border);
 }
 
-.rbc-agenda-view table tbody>tr:hover {
+.rbc-agenda-view table tbody > tr:hover {
     background-color: var(--muted);
 }
 
 /* Sidebar hover expansion estilo Instagram */
 /* Expandir el sidebar como overlay cuando está en hover */
-.sidebar-hover-expanded [data-slot="sidebar"][data-state="collapsed"]>div:nth-child(2) {
+.sidebar-hover-expanded [data-slot="sidebar"][data-state="collapsed"] > div:nth-child(2) {
     width: var(--sidebar-width) !important;
     z-index: 50;
     transition: width 0.2s ease-in-out;
 }
 
 /* Mantener el gap colapsado para no empujar contenido */
-.sidebar-hover-expanded [data-slot="sidebar"][data-state="collapsed"]>div:first-child {
+.sidebar-hover-expanded [data-slot="sidebar"][data-state="collapsed"] > div:first-child {
     width: calc(var(--sidebar-width-icon) + 1rem) !important;
 }
 
@@ -331,7 +329,7 @@
 }
 
 /* Asegurar que los iconos sean visibles */
-[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-button"]>svg:first-of-type {
+[data-hover-mode="true"][data-state="collapsed"] [data-sidebar="menu-button"] > svg:first-of-type {
     display: block !important;
     flex-shrink: 0 !important;
     width: 1rem !important;
@@ -355,7 +353,7 @@
 }
 
 /* Forzar que los spans dentro de los botones sean visibles */
-[data-hover-mode="true"][data-state="collapsed"][data-collapsible="icon"] [data-sidebar="menu-button"]>span:not(:first-child) {
+[data-hover-mode="true"][data-state="collapsed"][data-collapsible="icon"] [data-sidebar="menu-button"] > span:not(:first-child) {
     display: inline-block !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -371,7 +369,7 @@
 .service-orders-technician .gm-bundled-control,
 .service-orders-technician .gm-fullscreen-control,
 .service-orders-technician .gm-svpc,
-
+ 
 .service-orders-technician .gm-ui-hover-effect,
 .service-orders-technician .gm-style-cc div {
     display: none !important;

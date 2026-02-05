@@ -17,18 +17,18 @@ export default function AppLogo() {
 
     return (
         <>
-            <div className="flex aspect-square size-8 items-center justify-center  rounded-full  overflow-hidden  ">
+            <div className="flex aspect-square size-auto items-center justify-center  rounded-full  overflow-hidden  ">
                 {!imageError ? (
                     <img
                         src={logoPath}
-                        width={22}
-                        height={22}
+                        width={32}
+                        height={32}
                         alt={`${companyName} Logo`}
                         className="w-full h-full object-contain   "
                         onError={() => setImageError(true)}
                     />
                 ) : (
-                    <div className="w-full h-full flex items-center justify-center text-sidebar-primary-foreground text-xs font-bold">
+                    <div className="w-full h-full flex items-center justify-center text-sidebar-primary-foreground font-bold">
                         {initials}
                     </div>
                 )}

@@ -14,6 +14,18 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/nosotros', function () {
+    return Inertia::render('about');
+})->name('about');
+
+Route::get('/soluciones', function () {
+    return Inertia::render('solutions');
+})->name('solutions');
+
+Route::get('/soluciones/all', function () {
+    return Inertia::render('solutions/all');
+})->name('solutions.all');
+
 // Public demo request routes
 Route::get('/solicitar-demo', [\App\Http\Controllers\DemoRequestController::class, 'create'])->name('demo.create');
 Route::post('/solicitar-demo', [\App\Http\Controllers\DemoRequestController::class, 'store'])->name('demo.store');
@@ -69,6 +81,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Rutas solo para admin
     Route::middleware(['role:admin'])->prefix('admin')->group(function () {
         Route::resource('users', \App\Http\Controllers\UserController::class);
+        Route::resource('posts', \App\Http\Controllers\Admin\PostController::class, [
+            'as' => 'admin' // Prefixes route names with 'admin.' -> admin.posts.index
+        ]);
     });
 
     Route::resource('admin/technicians', \App\Http\Controllers\TechnicianController::class);

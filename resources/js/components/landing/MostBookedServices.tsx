@@ -36,7 +36,7 @@ const services = [
 
 export default function MostBookedServices() {
   return (
-    <section className="w-full bg-slate-950 py-12 md:py-24 lg:py-32 relative">
+    <section className="w-full bg-white py-12 md:py-24 lg:py-32 relative">
       <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
         <div className="text-center">
           <motion.h2
@@ -44,7 +44,7 @@ export default function MostBookedServices() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-2xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl"
+            className="text-2xl font-black tracking-tighter text-[#1d1d1d] sm:text-4xl md:text-5xl"
           >
             Soluciones Más Demandadas
           </motion.h2>
@@ -53,7 +53,7 @@ export default function MostBookedServices() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-4 max-w-[700px] text-lg text-slate-400"
+            className="mx-auto mt-4 max-w-[700px] text-lg text-[#1d1d1d]/70 font-medium"
           >
             Descubre las herramientas que están liderando la modernización del sector público y privado.
           </motion.p>
@@ -68,30 +68,30 @@ export default function MostBookedServices() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ scale: 1.05 }}
             >
-              <Card className="overflow-hidden transition-all bg-slate-900 border-slate-800 hover:shadow-[0_0_20px_rgba(37,99,235,0.25)] hover:border-blue-500/50 group h-full flex flex-col">
+              <Card className="overflow-hidden transition-all bg-white border-[#e8e9eb] hover:shadow-xl hover:shadow-[#0037ff]/10 hover:border-[#0037ff]/30 group h-full flex flex-col">
                 <div className="relative h-48 w-full overflow-hidden">
-                  <div className="absolute top-2 right-2 z-10 bg-blue-600/90 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full uppercase font-bold tracking-wide shadow-lg">
+                  <div className="absolute top-2 right-2 z-10 bg-[#0037ff] text-white text-xs px-2 py-1 rounded-full uppercase font-bold tracking-wide shadow-lg">
                     {service.category}
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent z-10 opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10 opacity-60" />
                   <img
                     src={service.image}
                     alt={service.name}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
                 <CardContent className="p-5 flex flex-col flex-1">
-                  <h3 className="text-lg font-semibold text-white mb-2 line-clamp-1 group-hover:text-blue-300 transition-colors" title={service.name}>{service.name}</h3>
+                  <h3 className="text-lg font-bold text-[#1d1d1d] mb-2 line-clamp-1 group-hover:text-[#0037ff] transition-colors" title={service.name}>{service.name}</h3>
                   <div className="flex items-center justify-between mb-4 mt-auto">
-                    <div className="flex items-center gap-1 bg-slate-800/50 px-2 py-1 rounded-md">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-medium text-slate-300">
-                        {service.rating} <span className="text-slate-500">({service.reviews})</span>
+                    <div className="flex items-center gap-1 bg-[#e8e9eb] px-2 py-1 rounded-md">
+                      <Star className="h-4 w-4 fill-[#0037ff] text-[#0037ff]" />
+                      <span className="text-sm font-bold text-[#1d1d1d]">
+                        {service.rating} <span className="text-[#1d1d1d]/50 font-normal">({service.reviews})</span>
                       </span>
                     </div>
                   </div>
                   <Button
-                    className="w-full rounded-full bg-slate-800 text-blue-400 border border-blue-500/30 hover:bg-blue-600 hover:text-white hover:border-transparent transition-all shadow-lg"
+                    className="w-full rounded-full bg-white text-[#0037ff] border-2 border-[#1d1d1d] hover:bg-[#1d1d1d] hover:text-white hover:border-[#1d1d1d] transition-all font-bold"
                     onClick={() => window.location.href = '/solicitar-demo'}
                   >
                     Solicitar Demo

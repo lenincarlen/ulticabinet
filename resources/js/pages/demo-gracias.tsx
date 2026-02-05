@@ -31,29 +31,29 @@ export default function DemoGracias({ demoRequest }: Props) {
         <>
             <Head title="¡Gracias por tu solicitud! - ultiCabinet" />
 
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+            <div className="min-h-screen min-h-screen bg-slate-950 text-slate-200 selection:bg-blue-500/30 flex items-center justify-center p-4">
                 <div className="max-w-2xl w-full">
                     {/* Success Icon */}
                     <div className="text-center mb-8">
-                        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-4">
-                            <CheckCircle2 className="h-12 w-12 text-green-600" />
+                        <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-300 mb-4">
+                            <CheckCircle2 className="h-12 w-12 text-blue-600" />
                         </div>
-                        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                        <h1 className="text-4xl font-bold text-white mb-2">
                             ¡Solicitud Recibida!
                         </h1>
-                        <p className="text-xl text-gray-600">
+                        <p className="text-xl text-white">
                             Gracias por tu interés en ultiCabinet
                         </p>
                     </div>
 
                     {/* Request Details Card */}
-                    <Card className="mb-6">
+                    <Card className="mb-6 bg-slate-700/50 border-slate-800 backdrop-blur-sm shadow-xl">
                         <CardContent className="pt-6">
                             <div className="space-y-4">
-                                <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
+                                <div className="flex items-start gap-3 p-4 bg-slate-700 rounded-lg">
                                     <Building2 className="h-5 w-5 text-blue-600 mt-0.5" />
                                     <div className="flex-1">
-                                        <p className="text-sm font-medium text-gray-700">Número de Solicitud</p>
+                                        <p className="text-sm font-medium text-white">Número de Solicitud</p>
                                         <p className="text-lg font-bold text-blue-600">{demoRequest.request_number}</p>
                                     </div>
                                 </div>
@@ -62,32 +62,32 @@ export default function DemoGracias({ demoRequest }: Props) {
                                     <div className="flex items-start gap-3">
                                         <Building2 className="h-5 w-5 text-gray-400 mt-0.5" />
                                         <div>
-                                            <p className="text-sm font-medium text-gray-700">Empresa</p>
-                                            <p className="text-gray-900">{demoRequest.company_name}</p>
+                                            <p className="text-sm font-medium text-white">Empresa</p>
+                                            <p className="text-gray-300">{demoRequest.company_name}</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start gap-3">
                                         <Calendar className="h-5 w-5 text-gray-400 mt-0.5" />
                                         <div>
-                                            <p className="text-sm font-medium text-gray-700">Solución</p>
-                                            <p className="text-gray-900">{demoRequest.solution.name}</p>
+                                            <p className="text-sm font-medium text-white">Solución</p>
+                                            <p className="text-gray-300">{demoRequest.solution.name}</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start gap-3">
                                         <Mail className="h-5 w-5 text-gray-400 mt-0.5" />
                                         <div>
-                                            <p className="text-sm font-medium text-gray-700">Email</p>
-                                            <p className="text-gray-900">{demoRequest.contact_email}</p>
+                                            <p className="text-sm font-medium text-white">Email</p>
+                                            <p className="text-gray-300">{demoRequest.contact_email}</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start gap-3">
                                         <Phone className="h-5 w-5 text-gray-400 mt-0.5" />
                                         <div>
-                                            <p className="text-sm font-medium text-gray-700">Teléfono</p>
-                                            <p className="text-gray-900">{demoRequest.contact_phone}</p>
+                                            <p className="text-sm font-medium text-white">Teléfono</p>
+                                            <p className="text-gray-300">{demoRequest.contact_phone}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -96,9 +96,9 @@ export default function DemoGracias({ demoRequest }: Props) {
                     </Card>
 
                     {/* Next Steps */}
-                    <Card className="mb-6">
+                    <Card className="mb-6 bg-slate-700/50 border-slate-800 backdrop-blur-sm shadow-xl">
                         <CardContent className="pt-6">
-                            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                            <h2 className="text-xl font-semibold text-white mb-4">
                                 ¿Qué sigue?
                             </h2>
                             <div className="space-y-3">
@@ -107,8 +107,8 @@ export default function DemoGracias({ demoRequest }: Props) {
                                         1
                                     </div>
                                     <div>
-                                        <p className="font-medium text-gray-900">Confirmación por Email</p>
-                                        <p className="text-sm text-gray-600">
+                                        <p className="font-medium text-white">Confirmación por Email</p>
+                                        <p className="text-sm text-gray-300">
                                             Recibirás un email de confirmación en {demoRequest.contact_email} con los detalles de tu solicitud.
                                         </p>
                                     </div>
@@ -119,8 +119,8 @@ export default function DemoGracias({ demoRequest }: Props) {
                                         2
                                     </div>
                                     <div>
-                                        <p className="font-medium text-gray-900">Contacto de Nuestro Equipo</p>
-                                        <p className="text-sm text-gray-600">
+                                        <p className="font-medium text-white">Contacto de Nuestro Equipo</p>
+                                        <p className="text-sm text-gray-300">
                                             Un especialista se pondrá en contacto contigo en las próximas 24 horas para coordinar el demo.
                                         </p>
                                     </div>
@@ -185,7 +185,7 @@ export default function DemoGracias({ demoRequest }: Props) {
                     </div>
 
                     {/* Footer Note */}
-                    <p className="text-center text-sm text-gray-500 mt-8">
+                    <p className="text-center text-sm text-gray-300 text-white mt-8">
                         Guarda este número de solicitud para futuras referencias: <strong>{demoRequest.request_number}</strong>
                     </p>
                 </div>

@@ -32,7 +32,7 @@ export interface SharedData {
     auth: Auth;
     sidebarOpen: boolean;
     siteSettings: Record<string, string>;
-    [key: string]: unknown;
+    [key: string]: unknown;π
 }
 
 export interface User {
