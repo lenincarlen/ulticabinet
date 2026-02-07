@@ -48,7 +48,7 @@ class PostController extends Controller
             'content' => 'required|string',
             'excerpt' => 'nullable|string',
             'status' => 'required|in:published,draft,archived',
-            'featured_image' => 'nullable|string',
+            'featured_image' => 'nullable|image|max:2048', // 2MB Max
             'published_at' => 'nullable|date',
         ]);
 
@@ -59,6 +59,11 @@ class PostController extends Controller
         $count = 1;
         while (Post::where('slug', $validated['slug'])->exists()) {
             $validated['slug'] = $originalSlug . '-' . $count++;
+        }
+
+        if ($request->hasFile('featured_image')) {
+            $path = $request->file('featured_image')->store('posts', 'public');
+            $validated['featured_image'] = $path;
         }
 
         Post::create($validated);
@@ -98,7 +103,7 @@ class PostController extends Controller
             'content' => 'required|string',
             'excerpt' => 'nullable|string',
             'status' => 'required|in:published,draft,archived',
-            'featured_image' => 'nullable|string',
+            'featured_image' => 'nullable|image|max:2048',
             'published_at' => 'nullable|date',
         ]);
 
@@ -110,6 +115,14 @@ class PostController extends Controller
             while (Post::where('slug', $validated['slug'])->where('id', '!=', $id)->exists()) {
                 $validated['slug'] = $originalSlug . '-' . $count++;
             }
+        }
+
+        if ($request->hasFile('featured_image')) {
+            $path = $request->file('featured_image')->store('posts', 'public');
+            $validated['featured_image'] = $path;
+        } else {
+             // Keep old image if no new one uploaded
+             unset($validated['featured_image']);
         }
 
         $post->update($validated);

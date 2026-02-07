@@ -66,7 +66,7 @@ const allNavItems: NavItemWithRoles[] = [
                 title: "Leads Management",
                 url: "/admin/demo-requests?status=new",
             },
-           
+
             {
                 title: "Canceladas - Lost",
                 url: "/admin/demo-requests?status=cancelled",
@@ -238,11 +238,12 @@ export function AppSidebar() {
 
     return (
         <aside className={cn(
-            "flex h-screen flex-col transition-all duration-300 ease-in-out bg-sidebar border-r border-2 border-gray-200 dark:bg-background",
+            "flex h-screen flex-col transition-all duration-300 ease-in-out border-r border-2 border-gray-700",
+            "bg-[#2d3748] text-white",
             isCollapsed ? "w-16" : "w-64"
         )}>
             {/* Header */}
-            <div className="flex h-16 items-center border-b px-4">
+            <div className="flex h-16 items-center border-b border-gray-700 px-4 bg-[#1a202c]">
                 {!isCollapsed && (
                     <Link href={dashboard()} className="flex items-center gap-2 flex-1">
                         <AppLogo />

@@ -19,14 +19,14 @@ export function NavUser({ isCollapsed = false }: { isCollapsed?: boolean }) {
                 <DropdownMenuTrigger asChild>
                     <button
                         className={cn(
-                            "flex items-center justify-center w-full p-2 rounded-lg",
-                            "hover:bg-accent/50 transition-all duration-200",
+                            "flex items-center justify-center w-full p-2 rounded-lg text-gray-400 hover:text-white",
+                            "hover:bg-white/5 transition-all duration-200",
                             "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                         )}
                         data-test="sidebar-menu-button-collapsed"
                         title={auth.user?.name || 'Usuario'}
                     >
-                        <User className="h-5 w-5 text-muted-foreground" />
+                        <User className="h-5 w-5" />
                     </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
@@ -45,14 +45,14 @@ export function NavUser({ isCollapsed = false }: { isCollapsed?: boolean }) {
             <DropdownMenuTrigger asChild>
                 <button
                     className={cn(
-                        "flex items-center gap-3 px-3 py-3 w-full rounded-lg",
-                        "hover:bg-accent/50 transition-all duration-200",
+                        "flex items-center gap-3 px-3 py-3 w-full rounded-lg text-left text-gray-400 hover:text-white",
+                        "hover:bg-white/5 transition-all duration-200",
                         "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                     )}
                     data-test="sidebar-menu-button"
                 >
                     <UserInfo user={auth.user} />
-                    <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 text-muted-foreground" />
+                    <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
                 </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent

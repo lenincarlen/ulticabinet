@@ -55,8 +55,8 @@ export function NavMain({
                   "flex items-center gap-3 transition-colors duration-200 outline-none",
                   isCollapsed ? "justify-center py-2" : "px-2 py-2",
                   isActive
-                    ? "text-blue-900 font-bold bg-[#0037ff]/5 rounded-md"
-                    : "text-[#1d1d1d]/70 hover:text-[#0037ff] hover:bg-[#0037ff]/5 rounded-md",
+                    ? "text-white font-bold bg-white/10 rounded-md"
+                    : "text-gray-400 hover:text-white hover:bg-white/5 rounded-md",
                   "group relative"
                 )}
                 title={isCollapsed ? item.title : undefined}
@@ -65,7 +65,7 @@ export function NavMain({
                   <item.icon className={cn(
                     "shrink-0 transition-colors",
                     isCollapsed ? "h-6 w-6" : "h-5 w-5",
-                    isActive ? "text-[#0037ff]" : "text-[#1d1d1d]/50 group-hover:text-[#0037ff]"
+                    isActive ? "text-white" : "text-gray-400 group-hover:text-white"
                   )} />
                 )}
                 {!isCollapsed && (
@@ -76,7 +76,7 @@ export function NavMain({
                     <ChevronRight className={cn(
                       "h-4 w-4 shrink-0 transition-transform duration-200",
                       isExpanded && "rotate-90",
-                      isActive ? "text-[#0037ff]" : "text-[#1d1d1d]/30 group-hover:text-[#0037ff]"
+                      isActive ? "text-white" : "text-gray-500 group-hover:text-white"
                     )} />
                   </>
                 )}
@@ -90,7 +90,7 @@ export function NavMain({
                     isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                   )}
                 >
-                  <div className="flex flex-col gap-1 mt-1 ml-4 pl-4 border-l border-gray-100">
+                  <div className="flex flex-col gap-1 mt-1 ml-4 pl-4 border-l border-gray-600">
                     {item.items?.map((subItem) => {
                       const isSubActive = isSubItemActive(subItem.url)
                       return (
@@ -100,8 +100,8 @@ export function NavMain({
                           className={cn(
                             "flex items-center gap-3 px-2 py-1.5 text-sm transition-colors duration-200",
                             isSubActive
-                              ? "text-[#0037ff] font-bold bg-[#0037ff]/5 rounded-md"
-                              : "text-[#1d1d1d]/70 hover:text-[#0037ff] hover:bg-[#0037ff]/5 rounded-md"
+                              ? "text-white font-bold bg-white/10 rounded-md"
+                              : "text-gray-400 hover:text-white hover:bg-white/5 rounded-md"
                           )}
                         >
                           <span>{subItem.title}</span>
@@ -124,8 +124,8 @@ export function NavMain({
               "flex items-center gap-3 transition-colors duration-200 outline-none",
               isCollapsed ? "justify-center py-2" : "px-2 py-2",
               isActive
-                ? "text-[#0037ff] font-bold bg-[#0037ff]/5 rounded-md"
-                : "text-[#1d1d1d]/70 hover:text-[#0037ff] hover:bg-[#0037ff]/5 rounded-md",
+                ? "text-white font-bold bg-white/10 rounded-md"
+                : "text-gray-400 hover:text-white hover:bg-white/5 rounded-md",
               "group relative"
             )}
             title={isCollapsed ? item.title : undefined}
@@ -134,7 +134,7 @@ export function NavMain({
               <item.icon className={cn(
                 "shrink-0 transition-colors",
                 isCollapsed ? "h-6 w-6" : "h-5 w-5",
-                isActive ? "text-[#0037ff]" : "text-[#1d1d1d]/50 group-hover:text-[#0037ff]"
+                isActive ? "text-white" : "text-gray-400 group-hover:text-white"
               )} />
             )}
             {!isCollapsed && (

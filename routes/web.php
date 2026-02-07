@@ -31,6 +31,10 @@ Route::get('/solicitar-demo', [\App\Http\Controllers\DemoRequestController::clas
 Route::post('/solicitar-demo', [\App\Http\Controllers\DemoRequestController::class, 'store'])->name('demo.store');
 Route::get('/demo-gracias/{request}', [\App\Http\Controllers\DemoRequestController::class, 'thanks'])->name('demo.thanks');
 
+// Blog Routes
+Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     

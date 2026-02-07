@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import RichTextEditor from '@/components/RichTextEditor';
 import {
     Select,
     SelectContent,
@@ -35,13 +36,18 @@ export default function PostsEdit({ post }: Props) {
         content: post.content || '',
         excerpt: post.excerpt || '',
         status: post.status || 'draft',
-        featured_image: post.featured_image || '',
+        featured_image: null as File | null | string,
         published_at: post.published_at ? post.published_at.split('T')[0] : '',
     });
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        put(`/admin/posts/${post.id}`);
+        // Use post method with _method: 'put' for file uploads in Inertia
+        router.post(`/admin/posts/${post.id}`, {
+            _method: 'put',
+            ...data,
+            featured_image: data.featured_image instanceof File ? data.featured_image : undefined,
+        });
     };
 
     const handleDelete = () => {
@@ -91,13 +97,11 @@ export default function PostsEdit({ post }: Props) {
                         </div>
 
                         <Card className="min-h-[500px] flex flex-col">
-                            <CardContent className="p-0 flex-1 flex flex-col">
-                                <Textarea
-                                    id="content"
+                            <CardContent className="p-0 flex-1 flex flex-col min-h-[500px]">
+                                <RichTextEditor
+                                    content={data.content}
+                                    onChange={(html) => setData('content', html)}
                                     placeholder="Escribe tu historia aquí..."
-                                    className="flex-1 min-h-[500px] border-none resize-none p-6 text-lg focus-visible:ring-0"
-                                    value={data.content}
-                                    onChange={(e) => setData('content', e.target.value)}
                                 />
                             </CardContent>
                         </Card>
@@ -177,18 +181,47 @@ export default function PostsEdit({ post }: Props) {
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-4">
-                                    {/* Placeholder for real image upload later */}
-                                    <div className="border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center text-center hover:bg-muted/50 transition-colors cursor-pointer">
-                                        <ImageIcon className="h-8 w-8 text-muted-foreground mb-2" />
-                                        <p className="text-sm text-muted-foreground">
-                                            Haz clic para establecer la imagen destacada
-                                        </p>
+                                    <div
+                                        className="border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center text-center hover:bg-muted/50 transition-colors cursor-pointer relative overflow-hidden group"
+                                        onClick={() => document.getElementById('featured_image_input')?.click()}
+                                    >
+                                        {(data.featured_image instanceof File) ? (
+                                            <div className="relative z-10">
+                                                <p className="text-sm font-medium text-green-600">Nueva imagen seleccionada:</p>
+                                                <p className="text-xs text-muted-foreground truncate max-w-[200px]">{data.featured_image.name}</p>
+                                            </div>
+                                        ) : post.featured_image ? (
+                                            <div className="relative w-full h-40">
+                                                <img
+                                                    src={`/storage/${post.featured_image}`}
+                                                    alt="Destacada"
+                                                    className="w-full h-full object-cover rounded-md"
+                                                />
+                                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-md">
+                                                    <p className="text-white text-sm font-medium">Cambiar imagen</p>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <ImageIcon className="h-8 w-8 text-muted-foreground mb-2" />
+                                                <p className="text-sm text-muted-foreground">
+                                                    Haz clic para subir una imagen
+                                                </p>
+                                            </>
+                                        )}
+                                        <input
+                                            id="featured_image_input"
+                                            type="file"
+                                            className="hidden"
+                                            accept="image/*"
+                                            onChange={(e) => {
+                                                if (e.target.files && e.target.files[0]) {
+                                                    setData('featured_image', e.target.files[0]);
+                                                }
+                                            }}
+                                        />
                                     </div>
-                                    <Input
-                                        placeholder="URL de la imagen (temporal)"
-                                        value={data.featured_image}
-                                        onChange={(e) => setData('featured_image', e.target.value)}
-                                    />
+                                    {errors.featured_image && <p className="text-sm text-red-500">{errors.featured_image}</p>}
                                 </div>
                             </CardContent>
                         </Card>

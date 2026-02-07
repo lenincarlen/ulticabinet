@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import RichTextEditor from '@/components/RichTextEditor';
 import {
     Select,
     SelectContent,
@@ -21,7 +22,7 @@ export default function PostsCreate() {
         content: '',
         excerpt: '',
         status: 'draft',
-        featured_image: '',
+        featured_image: null as File | null,
         published_at: new Date().toISOString().split('T')[0], // Default to today
     });
 
@@ -66,13 +67,11 @@ export default function PostsCreate() {
                         </div>
 
                         <Card className="min-h-[500px] flex flex-col">
-                            <CardContent className="p-0 flex-1 flex flex-col">
-                                <Textarea
-                                    id="content"
+                            <CardContent className="p-0 flex-1 flex flex-col min-h-[500px]">
+                                <RichTextEditor
+                                    content={data.content}
+                                    onChange={(html) => setData('content', html)}
                                     placeholder="Escribe tu historia aquí..."
-                                    className="flex-1 min-h-[500px] border-none resize-none p-6 text-lg focus-visible:ring-0"
-                                    value={data.content}
-                                    onChange={(e) => setData('content', e.target.value)}
                                 />
                             </CardContent>
                         </Card>
@@ -153,17 +152,36 @@ export default function PostsCreate() {
                             <CardContent>
                                 <div className="space-y-4">
                                     {/* Placeholder for real image upload later */}
-                                    <div className="border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center text-center hover:bg-muted/50 transition-colors cursor-pointer">
-                                        <ImageIcon className="h-8 w-8 text-muted-foreground mb-2" />
-                                        <p className="text-sm text-muted-foreground">
-                                            Haz clic para establecer la imagen destacada
-                                        </p>
+                                    <div
+                                        className="border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center text-center hover:bg-muted/50 transition-colors cursor-pointer relative overflow-hidden"
+                                        onClick={() => document.getElementById('featured_image_input')?.click()}
+                                    >
+                                        {data.featured_image ? (
+                                            <div className="relative z-10">
+                                                <p className="text-sm font-medium text-green-600">Imagen seleccionada:</p>
+                                                <p className="text-xs text-muted-foreground truncate max-w-[200px]">{data.featured_image.name}</p>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <ImageIcon className="h-8 w-8 text-muted-foreground mb-2" />
+                                                <p className="text-sm text-muted-foreground">
+                                                    Haz clic para subir una imagen
+                                                </p>
+                                            </>
+                                        )}
+                                        <input
+                                            id="featured_image_input"
+                                            type="file"
+                                            className="hidden"
+                                            accept="image/*"
+                                            onChange={(e) => {
+                                                if (e.target.files && e.target.files[0]) {
+                                                    setData('featured_image', e.target.files[0]);
+                                                }
+                                            }}
+                                        />
                                     </div>
-                                    <Input
-                                        placeholder="URL de la imagen (temporal)"
-                                        value={data.featured_image}
-                                        onChange={(e) => setData('featured_image', e.target.value)}
-                                    />
+                                    {errors.featured_image && <p className="text-sm text-red-500">{errors.featured_image}</p>}
                                 </div>
                             </CardContent>
                         </Card>

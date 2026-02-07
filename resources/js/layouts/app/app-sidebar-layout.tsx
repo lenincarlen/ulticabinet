@@ -11,7 +11,7 @@ export default function AppHeaderLayout({
     return (
         <AppShell variant="sidebar">
             <AppSidebar />
-            <AppContent variant="sidebar" className="bg-background">
+            <AppContent variant="sidebar" className="bg-[#f8fafc]">
                 {children}
             </AppContent>
         </AppShell>

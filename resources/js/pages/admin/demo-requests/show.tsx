@@ -134,13 +134,13 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                             variant="outline"
                             size="icon"
                             onClick={() => window.location.href = '/admin/demo-requests'}
-                            className="bg-white"
+                            className="bg-white border-gray-200 hover:bg-gray-50 text-gray-500"
                         >
                             <ArrowLeft className="h-4 w-4" />
                         </Button>
                         <div>
                             <div className="flex items-center gap-3">
-                                <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
+                                <h1 className="text-2xl md:text-3xl font-bold text-[#1f2937]">
                                     {demoRequest.company_name}
                                 </h1>
                                 <Badge className={cn("px-3 py-1 text-sm font-medium", statusInfo.color)}>
@@ -148,7 +148,7 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                                     {statusInfo.label}
                                 </Badge>
                             </div>
-                            <p className="text-gray-500 mt-1 flex items-center gap-2">
+                            <p className="text-[#6b7280] mt-1 flex items-center gap-2">
                                 <span>#{demoRequest.request_number}</span>
                                 <span>•</span>
                                 <span>{demoRequest.industry || 'Industria sin especificar'}</span>
@@ -158,7 +158,7 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                     <Button
                         onClick={() => setIsEditing(!isEditing)}
                         size="lg"
-                        className={isEditing ? "bg-red-600 hover:bg-red-700" : "bg-blue-600 hover:bg-blue-700"}
+                        className={isEditing ? "bg-red-500 hover:bg-red-600 border-none shadow-sm" : "bg-[#3b82f6] hover:bg-blue-600 border-none shadow-sm"}
                     >
                         {isEditing ? 'Cancelar Edición' : 'Gestionar Estado'}
                     </Button>
@@ -168,15 +168,14 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                     {/* Left Column - Main Info */}
                     <div className="lg:col-span-2 space-y-6">
 
-                        {/* Management Form - Shows when Editing */}
                         {isEditing && (
-                            <Card className='border-2 border-blue-100 shadow-md'>
-                                <CardHeader className="bg-blue-50/50 pb-4">
-                                    <CardTitle className="flex items-center gap-2 text-blue-700">
-                                        <Save className="h-5 w-5" />
+                            <Card className='border-0 shadow-sm bg-white rounded-lg overflow-hidden'>
+                                <CardHeader className="bg-gray-50/50 pb-4 border-b border-gray-100">
+                                    <CardTitle className="flex items-center gap-2 text-[#1f2937]">
+                                        <Save className="h-5 w-5 text-gray-400" />
                                         Actualizar Lead
                                     </CardTitle>
-                                    <CardDescription>
+                                    <CardDescription className="text-gray-500">
                                         Modificar estado, notas y detalles de seguimiento.
                                     </CardDescription>
                                 </CardHeader>
@@ -274,10 +273,10 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                                         )}
 
                                         <div className="flex justify-end gap-3 pt-2">
-                                            <Button type="button" variant="outline" onClick={() => setIsEditing(false)}>
+                                            <Button type="button" variant="outline" onClick={() => setIsEditing(false)} className="border-gray-200 text-gray-500 hover:bg-gray-50">
                                                 Cancelar
                                             </Button>
-                                            <Button type="submit" disabled={processing} className="bg-blue-600 hover:bg-blue-700">
+                                            <Button type="submit" disabled={processing} className="bg-[#3b82f6] hover:bg-blue-600 shadow-sm border-none">
                                                 <Save className="h-4 w-4 mr-2" />
                                                 {processing ? 'Guardando...' : 'Guardar Cambios'}
                                             </Button>
@@ -290,10 +289,10 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                         {/* Company & Contact Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                             {/* Company Information */}
-                            <Card className="h-full shadow-sm hover:shadow-md transition-shadow">
-                                <CardHeader className="pb-3 border-b">
-                                    <CardTitle className="flex items-center gap-2 text-base">
-                                        <Building2 className="h-4 w-4 text-gray-500" />
+                            <Card className="h-full border-0 shadow-sm bg-white rounded-lg">
+                                <CardHeader className="pb-3 border-b border-gray-100">
+                                    <CardTitle className="flex items-center gap-2 text-base text-[#1f2937]">
+                                        <Building2 className="h-4 w-4 text-gray-400" />
                                         Información Corporativa
                                     </CardTitle>
                                 </CardHeader>
@@ -315,10 +314,10 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                             </Card>
 
                             {/* Contact Information */}
-                            <Card className="h-full shadow-sm hover:shadow-md transition-shadow">
-                                <CardHeader className="pb-3 border-b">
-                                    <CardTitle className="flex items-center gap-2 text-base">
-                                        <User className="h-4 w-4 text-gray-500" />
+                            <Card className="h-full border-0 shadow-sm bg-white rounded-lg">
+                                <CardHeader className="pb-3 border-b border-gray-100">
+                                    <CardTitle className="flex items-center gap-2 text-base text-[#1f2937]">
+                                        <User className="h-4 w-4 text-gray-400" />
                                         Contacto Principal
                                     </CardTitle>
                                 </CardHeader>
@@ -354,10 +353,10 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                         </div>
 
                         {/* Solution & Preferences */}
-                        <Card className="shadow-sm">
-                            <CardHeader className="pb-3 border-b">
-                                <CardTitle className="flex items-center gap-2 text-base">
-                                    <Target className="h-4 w-4 text-gray-500" />
+                        <Card className="border-0 shadow-sm bg-white rounded-lg">
+                            <CardHeader className="pb-3 border-b border-gray-100">
+                                <CardTitle className="flex items-center gap-2 text-base text-[#1f2937]">
+                                    <Target className="h-4 w-4 text-gray-400" />
                                     Detalles del Requerimiento
                                 </CardTitle>
                             </CardHeader>
@@ -419,13 +418,13 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                     {/* Right Column - Timeline & Stats */}
                     <div className="space-y-6">
                         {/* Quick Stats */}
-                        <Card className="shadow-sm  rounded-md bg-yellow-50 border-yellow-200">
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-sm font-medium text-slate-500 uppercase tracking-wider">KPIs del Lead</CardTitle>
+                        <Card className="border-0 shadow-sm rounded-lg bg-yellow-50/50 border-yellow-100">
+                            <CardHeader className="pb-2 border-b border-yellow-100/50">
+                                <CardTitle className="text-sm font-medium text-yellow-800 uppercase tracking-wider">KPIs del Lead</CardTitle>
                             </CardHeader>
-                            <CardContent className="space-y-4">
+                            <CardContent className="space-y-4 pt-4">
                                 <div>
-                                    <p className="text-2xl font-bold text-gray-900">
+                                    <p className="text-2xl font-bold text-[#1f2937]">
                                         {demoRequest.conversion_probability ? `${demoRequest.conversion_probability}%` : '—'}
                                     </p>
                                     <p className="text-xs text-gray-500">Probabilidad de Conversión</p>
@@ -471,10 +470,10 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                         </Card>
 
                         {/* Status History */}
-                        <Card className="shadow-sm h-fit">
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2 text-base">
-                                    <Clock className="h-4 w-4 text-gray-500" />
+                        <Card className="border-0 shadow-sm h-fit bg-white rounded-lg">
+                            <CardHeader className="pb-3 border-b border-gray-100">
+                                <CardTitle className="flex items-center gap-2 text-base text-[#1f2937]">
+                                    <Clock className="h-4 w-4 text-gray-400" />
                                     Línea de Tiempo
                                 </CardTitle>
                             </CardHeader>

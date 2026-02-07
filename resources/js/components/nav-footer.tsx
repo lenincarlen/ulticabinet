@@ -17,7 +17,7 @@ export function NavFooter({
                     href={resolveUrl(item.href)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-all duration-200"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-200"
                 >
                     {item.icon && <item.icon className="h-4 w-4 shrink-0" />}
                     <span>{item.title}</span>
