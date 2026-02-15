@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('staff')->onDelete('set null');
             $table->uuid('service_order_id')->nullable();
-            $table->foreign('service_order_id')->references('id')->on('service_orders')->onDelete('set null');
+            // $table->foreign('service_order_id')->references('id')->on('service_orders')->onDelete('set null');
             $table->text('details')->nullable();
             $table->timestamps();
         });
