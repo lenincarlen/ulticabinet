@@ -46,10 +46,10 @@ class RoleSeeder extends Seeder
         }
 
         // Crear usuarios de ejemplo para cada rol
-        // Nota: El campo 'name' fue removido de users, ahora viene de staff
         $users = [
             // Admin
             [
+                'name' => 'Administrador',
                 'email' => 'admin@ulticabinet.com',
                 'password' => Hash::make('admin123'),
                 'email_verified_at' => now(),
@@ -59,6 +59,7 @@ class RoleSeeder extends Seeder
        
             // Operadores
             [
+                'name' => 'Operador',
                 'email' => 'operador@ulticabinet.com',
                 'password' => Hash::make('operador123'),
                 'email_verified_at' => now(),
@@ -68,6 +69,7 @@ class RoleSeeder extends Seeder
          
             // Vendedores
             [
+                'name' => 'Vendedor',
                 'email' => 'vendedor@ulticabinet.com',
                 'password' => Hash::make('vendedor123'),
                 'email_verified_at' => now(),
