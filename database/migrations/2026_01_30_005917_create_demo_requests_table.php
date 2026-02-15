@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('demo_requests', function (Blueprint $table) {
             $table->id();
             
-            // Solution reference
-            $table->foreignId('solution_id')->constrained('solutions')->onDelete('cascade');
-            
+            // Solution reference removed
+             
             // Request tracking
             $table->string('request_number', 50)->unique();
             
@@ -69,8 +68,6 @@ return new class extends Migration
             
             // Indexes
             $table->index('status');
-            $table->index('solution_id');
-            $table->index('assigned_to');
             $table->index('scheduled_at');
             $table->index('created_at');
             $table->index('contact_email');

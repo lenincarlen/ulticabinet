@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\DemoRequest;
-use App\Models\Solution;
 use App\Models\User;
 use App\Notifications\NewDemoRequestNotification;
 use App\Notifications\DemoRequestConfirmationNotification;
@@ -19,13 +18,7 @@ class DemoRequestController extends Controller
      */
     public function create()
     {
-        $solutions = Solution::active()
-            ->ordered()
-            ->get(['id', 'name', 'slug', 'short_description', 'icon', 'category', 'demo_duration_minutes']);
-
-        return Inertia::render('demo-request', [
-            'solutions' => $solutions,
-        ]);
+        return Inertia::render('demo-request');
     }
 
     /**
@@ -34,7 +27,7 @@ class DemoRequestController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'solution_id' => 'required|exists:solutions,id',
+          
             'company_name' => 'required|string|max:255',
             'contact_name' => 'required|string|max:255',
             'contact_email' => 'required|email|max:255',
@@ -105,7 +98,6 @@ class DemoRequestController extends Controller
     public function thanks($requestNumber)
     {
         $demoRequest = DemoRequest::where('request_number', $requestNumber)
-            ->with('solution')
             ->firstOrFail();
 
         return Inertia::render('demo-gracias', [

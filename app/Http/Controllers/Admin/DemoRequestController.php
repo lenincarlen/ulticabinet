@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DemoRequest;
-use App\Models\Solution;
 // use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +17,7 @@ class DemoRequestController extends Controller
      */
     public function index(Request $request)
     {
-        $query = DemoRequest::with(['solution'])
+        $query = DemoRequest::query()
             ->orderBy('created_at', 'desc');
 
         // Filter by status
@@ -27,9 +26,7 @@ class DemoRequestController extends Controller
         }
 
         // Filter by solution
-        if ($request->has('solution_id') && $request->solution_id) {
-            $query->where('solution_id', $request->solution_id);
-        }
+
 
         // Filter by assigned staff (REMOVED)
         // if ($request->has('assigned_to') && $request->assigned_to) {
@@ -51,7 +48,7 @@ class DemoRequestController extends Controller
         $demoRequests = $query->paginate(15);
 
         // Get filters data
-        $solutions = Solution::active()->ordered()->get(['id', 'name']);
+
         // $staff = Staff::where('is_active', true)->get(['id', 'name']);
 
         // Get statistics
@@ -65,10 +62,8 @@ class DemoRequestController extends Controller
 
         return Inertia::render('admin/demo-requests/index', [
             'demoRequests' => $demoRequests,
-            'solutions' => $solutions,
-            'staff' => [], // Empty array as staff feature is removed
             'stats' => $stats,
-            'filters' => $request->only(['status', 'solution_id', 'search']),
+            'filters' => $request->only(['status', 'search']),
         ]);
     }
 
@@ -78,8 +73,6 @@ class DemoRequestController extends Controller
     public function show($id)
     {
         $demoRequest = DemoRequest::with([
-            'solution',
-            
             'statusHistory' // .changedByStaff removed
         ])->findOrFail($id);
 
@@ -207,16 +200,14 @@ class DemoRequestController extends Controller
      */
     public function export(Request $request)
     {
-        $query = DemoRequest::with(['solution']);
+        $query = DemoRequest::query();
 
         // Apply same filters as index
         if ($request->has('status') && $request->status !== 'all') {
             $query->where('status', $request->status);
         }
 
-        if ($request->has('solution_id') && $request->solution_id) {
-            $query->where('solution_id', $request->solution_id);
-        }
+
 
         // if ($request->has('assigned_to') && $request->assigned_to) {
         //    $query->where('assigned_to', $request->assigned_to);
@@ -252,14 +243,6 @@ class DemoRequestController extends Controller
             'conversion_rate' => DemoRequest::count() > 0 
                 ? round((DemoRequest::whereIn('status', ['sold', 'completed'])->count() / DemoRequest::count()) * 100, 2)
                 : 0,
-            
-            // Top solutions
-            'top_solutions' => DemoRequest::selectRaw('solution_id, COUNT(*) as count')
-                ->groupBy('solution_id')
-                ->orderByDesc('count')
-                ->limit(5)
-                ->with('solution')
-                ->get(),
         ];
 
         return response()->json($stats);

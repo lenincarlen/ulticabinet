@@ -26,11 +26,7 @@ import {
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
-interface Solution {
-    id: number;
-    name: string;
-    category: string;
-}
+
 
 interface Staff {
     id: number;
@@ -72,7 +68,7 @@ interface DemoRequest {
     conversion_probability: number | null;
     estimated_value: number | null;
     created_at: string;
-    solution: Solution;
+
     assigned_staff: Staff | null;
     status_history: StatusHistory[];
 }
@@ -363,13 +359,6 @@ export default function DemoRequestShow({ demoRequest, staff }: Props) {
                             <CardContent className="pt-6 space-y-6">
                                 <div className="flex items-start justify-between border-b border-gray-100 pb-4">
                                     <div>
-                                        <Label className="text-gray-500 text-xs uppercase inline-block mb-1">Solución de Interés</Label>
-                                        <p className="font-bold text-lg text-blue-900">{demoRequest.solution.name}</p>
-                                        <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 mt-1">
-                                            {demoRequest.solution.category}
-                                        </span>
-                                    </div>
-                                    <div className="text-right">
                                         <Label className="text-gray-500 text-xs uppercase inline-block mb-1">Formato</Label>
                                         <p className="font-medium capitalize">{demoRequest.demo_format || 'Virtual'}</p>
                                     </div>

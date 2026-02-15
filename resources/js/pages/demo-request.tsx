@@ -12,19 +12,7 @@ import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import { motion } from 'framer-motion';
 
-interface Solution {
-    id: number;
-    name: string;
-    slug: string;
-    short_description: string;
-    icon: string;
-    category: string;
-    demo_duration_minutes: number;
-}
 
-interface Props {
-    solutions: Solution[];
-}
 
 const painPointOptions = [
     'Procesos manuales lentos',
@@ -37,11 +25,11 @@ const painPointOptions = [
     'Reportes insuficientes',
 ];
 
-export default function DemoRequest({ solutions }: Props) {
+export default function DemoRequest() {
     const [selectedPainPoints, setSelectedPainPoints] = useState<string[]>([]);
 
     const { data, setData, post, processing, errors } = useForm({
-        solution_id: '',
+
         company_name: '',
         contact_name: '',
         contact_email: '',
@@ -49,6 +37,7 @@ export default function DemoRequest({ solutions }: Props) {
         company_size: '',
         industry: '',
         current_solution: '',
+
         pain_points: [] as string[],
         preferred_date: '',
         preferred_time: '',
@@ -70,7 +59,6 @@ export default function DemoRequest({ solutions }: Props) {
         post('/solicitar-demo');
     };
 
-    const selectedSolution = solutions.find(s => s.id === Number(data.solution_id));
 
     return (
         <>
@@ -111,51 +99,7 @@ export default function DemoRequest({ solutions }: Props) {
                         <div className="max-w-3xl mx-auto bg-white/50 border border-[#e8e9eb] backdrop-blur-sm shadow-xl p-4 rounded-xl">
                             <form onSubmit={handleSubmit} className="space-y-8">
                                 {/* Solution Selection */}
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.3 }}
-                                >
-                                    <Card className="bg-white border-[#e8e9eb] shadow-md py-4">
-                                        <CardHeader>
-                                            <CardTitle className="flex items-center gap-2 text-[#1d1d1d]">
-                                                <Target className="h-5 w-5 text-[#0037ff]" />
-                                                Selecciona la Solución
-                                            </CardTitle>
-                                            <CardDescription className="text-[#1d1d1d]/60">
-                                                ¿Qué sistema te interesa conocer?
-                                            </CardDescription>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="solution_id" className="text-[#1d1d1d]">Solución *</Label>
-                                                <Select
-                                                    value={data.solution_id}
-                                                    onValueChange={(value) => setData('solution_id', value)}
-                                                >
-                                                    <SelectTrigger id="solution_id" className="bg-white border-[#e8e9eb] text-[#1d1d1d] focus:ring-[#0037ff]/50">
-                                                        <SelectValue placeholder="Selecciona una solución" />
-                                                    </SelectTrigger>
-                                                    <SelectContent className="bg-white border-[#e8e9eb] text-[#1d1d1d]">
-                                                        {solutions.map((solution) => (
-                                                            <SelectItem key={solution.id} value={solution.id.toString()} className="focus:bg-[#e8e9eb] focus:text-[#1d1d1d]">
-                                                                {solution.name} - {solution.category}
-                                                            </SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
-                                                {errors.solution_id && (
-                                                    <p className="text-sm text-red-500">{errors.solution_id}</p>
-                                                )}
-                                                {selectedSolution && (
-                                                    <p className="text-sm text-[#0037ff] mt-2 bg-[#0037ff]/5 p-2 rounded border border-[#0037ff]/20 inline-block font-medium">
-                                                        {selectedSolution.short_description} • Duración: {selectedSolution.demo_duration_minutes} min
-                                                    </p>
-                                                )}
-                                            </div>
-                                        </CardContent>
-                                    </Card>
-                                </motion.div>
+
 
                                 {/* Company Information */}
                                 <motion.div

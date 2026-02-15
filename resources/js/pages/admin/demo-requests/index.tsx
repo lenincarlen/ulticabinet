@@ -41,10 +41,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-interface Solution {
-    id: number;
-    name: string;
-}
+
 
 interface Staff {
     id: number;
@@ -61,7 +58,6 @@ interface DemoRequest {
     status: string;
     created_at: string;
     scheduled_at: string | null;
-    solution: Solution;
     assigned_staff: Staff | null;
 }
 
@@ -84,12 +80,10 @@ interface Props {
         per_page: number;
         total: number;
     };
-    solutions: Solution[];
     staff: Staff[];
     stats: Stats;
     filters: {
         status?: string;
-        solution_id?: string;
         assigned_to?: string;
         search?: string;
     };
@@ -110,7 +104,7 @@ const statusConfig = {
     in_progress: { label: 'En Proceso', color: 'bg-blue-100 text-blue-800 hover:bg-blue-200', icon: Clock },
 };
 
-export default function DemoRequestsIndex({ demoRequests, solutions, staff, stats, filters }: Props) {
+export default function DemoRequestsIndex({ demoRequests, staff, stats, filters }: Props) {
     const [searchTerm, setSearchTerm] = useState(filters.search || '');
 
     const handleSearch = (e: React.FormEvent) => {
@@ -218,22 +212,6 @@ export default function DemoRequestsIndex({ demoRequests, solutions, staff, stat
                                 </SelectContent>
                             </Select>
 
-                            <Select
-                                value={filters.solution_id || 'all'}
-                                onValueChange={(value) => handleFilterChange('solution_id', value)}
-                            >
-                                <SelectTrigger className="h-9 w-[180px]">
-                                    <SelectValue placeholder="Solución" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="all">Todas las soluciones</SelectItem>
-                                    {solutions.map((solution) => (
-                                        <SelectItem key={solution.id} value={solution.id.toString()}>
-                                            {solution.name}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
                         </div>
                     </div>
 
@@ -244,7 +222,6 @@ export default function DemoRequestsIndex({ demoRequests, solutions, staff, stat
                                     <TableHead className="w-[160px] px-4"># ID</TableHead>
                                     <TableHead className="w-[200px]">Empresa</TableHead>
                                     <TableHead>Contacto</TableHead>
-                                    <TableHead>Solución</TableHead>
                                     <TableHead>Estado</TableHead>
                                     <TableHead className="hidden md:table-cell">Fecha</TableHead>
                                     <TableHead className="text-right">Acciones</TableHead>
@@ -276,13 +253,7 @@ export default function DemoRequestsIndex({ demoRequests, solutions, staff, stat
                                                         <span className="text-xs text-muted-foreground">{request.contact_email}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell>
-                                                    <div className="flex items-center gap-2">
-                                                        <Badge variant="outline" className="font-normal">
-                                                            {request.solution.name}
-                                                        </Badge>
-                                                    </div>
-                                                </TableCell>
+
                                                 <TableCell>
                                                     <Badge variant="secondary" className={`pl-1.5 pr-2.5 py-0.5 border-0 font-medium ${statusInfo.color}`}>
                                                         <StatusIcon className="h-3.5 w-3.5 mr-1" />

@@ -3,11 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle2, Calendar, Mail, Phone, Building2, ArrowRight } from 'lucide-react';
 
-interface Solution {
-    id: number;
-    name: string;
-    category: string;
-}
+
 
 interface DemoRequest {
     id: number;
@@ -18,7 +14,6 @@ interface DemoRequest {
     contact_phone: string;
     preferred_date: string | null;
     demo_format: string;
-    solution: Solution;
     created_at: string;
 }
 
@@ -67,13 +62,7 @@ export default function DemoGracias({ demoRequest }: Props) {
                                         </div>
                                     </div>
 
-                                    <div className="flex items-start gap-3">
-                                        <Calendar className="h-5 w-5 text-gray-400 mt-0.5" />
-                                        <div>
-                                            <p className="text-sm font-medium text-white">Solución</p>
-                                            <p className="text-gray-300">{demoRequest.solution.name}</p>
-                                        </div>
-                                    </div>
+
 
                                     <div className="flex items-start gap-3">
                                         <Mail className="h-5 w-5 text-gray-400 mt-0.5" />
@@ -133,7 +122,7 @@ export default function DemoGracias({ demoRequest }: Props) {
                                     <div>
                                         <p className="font-medium text-gray-900">Demo Personalizado</p>
                                         <p className="text-sm text-gray-600">
-                                            Te mostraremos cómo {demoRequest.solution.name} puede ayudar a tu empresa.
+                                            Te mostraremos cómo nuestra solución puede ayudar a tu empresa.
                                         </p>
                                     </div>
                                 </div>

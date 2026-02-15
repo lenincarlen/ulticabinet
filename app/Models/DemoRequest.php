@@ -11,7 +11,7 @@ class DemoRequest extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'solution_id',
+      
         'request_number',
         'company_name',
         'contact_name',
@@ -58,13 +58,7 @@ class DemoRequest extends Model
         'deleted_at' => 'datetime',
     ];
 
-    /**
-     * Get the solution for this demo request
-     */
-    public function solution()
-    {
-        return $this->belongsTo(Solution::class, 'solution_id');
-    }
+ 
 
     /**
      * Get the staff member assigned to this demo
@@ -133,13 +127,7 @@ class DemoRequest extends Model
         return $query->where('status', 'completed');
     }
 
-    /**
-     * Scope to filter by solution
-     */
-    public function scopeForSolution($query, $solutionId)
-    {
-        return $query->where('solution_id', $solutionId);
-    }
+ 
 
     /**
      * Scope to filter by assigned staff
