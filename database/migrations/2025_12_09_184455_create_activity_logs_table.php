@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->string('action'); // created, updated, deleted, processed, etc.
             $table->string('model_type')->nullable(); // ServiceOrder, Invoice, etc.
             $table->uuid('model_id')->nullable();
@@ -25,14 +25,12 @@ return new class extends Migration
             $table->timestamps();
             
             // Indexes
-            $table->index('user_id');
+            // $table->index('user_id'); // Created by foreignId
             $table->index('model_type');
             $table->index('model_id');
             $table->index(['model_type', 'model_id']);
             $table->index('created_at');
             
-            // Foreign key
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
