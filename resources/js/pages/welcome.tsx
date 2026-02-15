@@ -4,19 +4,11 @@ import Header from "@/components/landing/Header";
 import Hero from "@/components/landing/Hero";
 import Testimonials from "@/components/landing/Testimonials";
 import Footer from "@/components/landing/Footer";
-import ServiceCategories from "@/components/landing/ServiceCategories";
-import MostBookedServices from "@/components/landing/MostBookedServices";
 import ReasonsToLove from "@/components/landing/ReasonsToLove";
 import Offers from "@/components/landing/Offers";
 import ProductShowcase from "@/components/landing/ProductShowcase";
 import About from "@/components/landing/About";
 import ThemeProvider from "@/components/ThemeProvider";
-
-interface ServiceType {
-  id: string;
-  name: string;
-  description?: string;
-}
 
 interface Solution {
   id: number;
@@ -28,11 +20,10 @@ interface Solution {
 
 interface WelcomeProps {
   canRegister?: boolean;
-  serviceTypes: ServiceType[];
   solutions: Solution[];
 }
 
-export default function Welcome({ canRegister = true, serviceTypes = [], solutions = [] }: WelcomeProps) {
+export default function Welcome({ canRegister = true, solutions = [] }: WelcomeProps) {
   const { auth } = usePage<SharedData>().props;
 
   return (
@@ -46,11 +37,12 @@ export default function Welcome({ canRegister = true, serviceTypes = [], solutio
         <Header isAuthenticated={!!auth.user} canRegister={canRegister} />
 
         <main className="flex-1">
-          <Hero serviceTypes={serviceTypes} />
+          <Hero />
           <ProductShowcase solutions={solutions} />
           <About />
           <ReasonsToLove />
-          <MostBookedServices />
+          <About />
+          <ReasonsToLove />
           <Offers />
           <Testimonials />
         </main>

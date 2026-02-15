@@ -5,17 +5,7 @@ import { SharedData } from "@/types";
 import ParticlesBackground from "./ParticlesBackground";
 import { motion } from "framer-motion";
 
-interface ServiceType {
-  id: string;
-  name: string;
-  description?: string;
-}
-
-interface HeroProps {
-  serviceTypes?: ServiceType[];
-}
-
-export default function Hero({ serviceTypes = [] }: HeroProps) {
+export default function Hero() {
   const { siteSettings } = usePage<SharedData>().props;
 
   // Obtener logo y banner desde configuración

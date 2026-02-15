@@ -73,7 +73,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Rutas solo para admin y operador
     Route::middleware(['role:admin,operador'])->prefix('admin')->group(function () {
         Route::resource('staff', \App\Http\Controllers\StaffController::class);
-        Route::resource('services', \App\Http\Controllers\ServiceController::class);
+
         
         // Ruta de compatibilidad para StaffManagement
         Route::get('staff-management', function () {
