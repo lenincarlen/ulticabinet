@@ -15,8 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('action');
             $table->timestamp('timestamp')->useCurrent();
-            $table->uuid('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('staff')->onDelete('set null');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->uuid('service_order_id')->nullable();
             // $table->foreign('service_order_id')->references('id')->on('service_orders')->onDelete('set null');
             $table->text('details')->nullable();
