@@ -24,11 +24,7 @@ class CustomerController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // Obtener lista de staff para account manager (REMOVED)
-        // $staff = \App\Models\Staff::where('active', true)
-        //    ->orderBy('name')
-        //    ->select('id', 'name', 'email')
-        //    ->get();
+      
 
         return Inertia::render('admin/customers/index', [
             'customers' => $customers,
@@ -101,11 +97,7 @@ class CustomerController extends Controller
         // Cargar relaciones necesarias
         $customer->load(['createdBy']);
         
-        // Obtener lista de staff para account manager (REMOVED)
-        // $staff = \App\Models\Staff::where('active', true)
-        //    ->orderBy('name')
-        //    ->select('id', 'name', 'email')
-        //    ->get();
+      
         
         return Inertia::render('admin/customers/edit', [
             'customer' => $customer,
@@ -141,7 +133,7 @@ class CustomerController extends Controller
             'customer_lifetime_value' => 'nullable|numeric|min:0',
             'segment' => 'nullable|string|max:50',
             'category' => 'nullable|string|max:50',
-            // 'account_manager_id' => 'nullable|uuid|exists:staff,id',
+ 
             // Último contacto
             'last_contact_date' => 'nullable|date',
             'last_contact_type' => 'nullable|string|max:50',

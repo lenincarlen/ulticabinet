@@ -60,13 +60,7 @@ class DemoRequest extends Model
 
  
 
-    /**
-     * Get the staff member assigned to this demo
-     */
-    // public function assignedStaff()
-    // {
-    //     return $this->belongsTo(Staff::class, 'assigned_to');
-    // }
+  
 
     /**
      * Get the status history for this demo request
@@ -129,13 +123,7 @@ class DemoRequest extends Model
 
  
 
-    /**
-     * Scope to filter by assigned staff
-     */
-    // public function scopeAssignedTo($query, $staffId)
-    // {
-    //     return $query->where('assigned_to', $staffId);
-    // }
+  
 
     /**
      * Generate a unique request number

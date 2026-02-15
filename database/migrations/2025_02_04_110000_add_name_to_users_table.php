@@ -15,8 +15,7 @@ return new class extends Migration
             if (!Schema::hasColumn('users', 'name')) {
                 $table->string('name')->nullable()->after('id');
             }
-            // Ensure staff_id is nullable (it was created as nullable in restore_staff_table, but good to ensure)
-            $table->uuid('staff_id')->nullable()->change();
+            // staff_id logic removed
         });
     }
 
@@ -29,7 +28,7 @@ return new class extends Migration
             if (Schema::hasColumn('users', 'name')) {
                 $table->dropColumn('name');
             }
-            // We don't revert staff_id to not nullable because it might break data
+            
         });
     }
 };

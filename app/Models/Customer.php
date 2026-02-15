@@ -116,10 +116,7 @@ class Customer extends Model
     /**
      * Responsable de cuenta (Account Manager) (REMOVED)
      */
-    // public function accountManager()
-    // {
-    //    return $this->belongsTo(Staff::class, 'account_manager_id');
-    // }
+  
 
     // Commented out until Invoice model is created
     // public function calculateLifetimeValue(): float

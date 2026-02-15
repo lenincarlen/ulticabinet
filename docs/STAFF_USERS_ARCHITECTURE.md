@@ -20,11 +20,7 @@
 
 ### Relación Actual
 ```
-Staff (1) ──────< (0..1) User
-```
-- Un Staff puede tener 0 o 1 User
-- Un User pertenece a un Staff (opcional)
-- Relación: `staff_id` en tabla `users`
+ 
 
 ### Problemas Identificados
 
@@ -115,7 +111,7 @@ Campos:
 Campos:
 - Credenciales:
   • id (auto-increment)
-  • staff_id (UUID, nullable pero requerido para usuarios internos)
+ usuarios internos)
   • email (debe coincidir con Staff.email si staff_id existe)
   • password
   • is_active

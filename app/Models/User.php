@@ -23,7 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'staff_id',
+    
         'is_active',
     ];
 
@@ -77,11 +77,5 @@ class User extends Authenticatable
         return $this->roles()->whereIn('name', $roleNames)->exists();
     }
 
-    /**
-     * Get the staff member associated with this user.
-     */
-    public function staff()
-    {
-        return $this->belongsTo(Staff::class, 'staff_id');
-    }
+    
 }

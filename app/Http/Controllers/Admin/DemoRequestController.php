@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DemoRequest;
-// use App\Models\Staff;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -27,8 +27,7 @@ class DemoRequestController extends Controller
 
         // Filter by solution
 
-
-        // Filter by assigned staff (REMOVED)
+ 
         // if ($request->has('assigned_to') && $request->assigned_to) {
         //    $query->where('assigned_to', $request->assigned_to);
         // }
@@ -49,8 +48,7 @@ class DemoRequestController extends Controller
 
         // Get filters data
 
-        // $staff = Staff::where('is_active', true)->get(['id', 'name']);
-
+        
         // Get statistics
         $stats = [
             'total' => DemoRequest::count(),
@@ -141,13 +139,8 @@ class DemoRequestController extends Controller
 
         return back()->with('success', 'Demo request updated successfully');
     }
-
-    /**
-     * Assign demo request to staff
-     */
-    /*
-     * Assign demo request to staff (REMOVED)
-     */
+ 
+    
     public function assign(Request $request, $id)
     {
         return back()->with('error', 'Staff assignment is disabled.');
@@ -162,7 +155,7 @@ class DemoRequestController extends Controller
 
         $validator = Validator::make($request->all(), [
             'scheduled_at' => 'required|date|after:now',
-            // 'assigned_to' => 'required|exists:staff,id',
+ 
             'notes' => 'nullable|string|max:500',
         ]);
 
