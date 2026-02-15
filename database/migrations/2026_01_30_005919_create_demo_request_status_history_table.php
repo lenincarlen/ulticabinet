@@ -13,19 +13,17 @@ return new class extends Migration
     {
         Schema::create('demo_request_status_history', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('demo_request_id');
+            $table->foreignId('demo_request_id')->constrained('demo_requests')->onDelete('cascade');
             $table->string('old_status', 50)->nullable();
             $table->string('new_status', 50);
-            $table->uuid('changed_by_id')->nullable();
+            $table->foreignId('changed_by_id')->nullable()->constrained('users')->onDelete('set null');
             $table->text('notes')->nullable();
             $table->timestamp('created_at')->useCurrent();
             
-            // Foreign keys
-            $table->foreign('demo_request_id')->references('id')->on('demo_requests')->onDelete('cascade');
-            $table->foreign('changed_by_id')->references('id')->on('users')->onDelete('set null');
+            // Foreign keys defined inline above
             
             // Índices
-            $table->index('demo_request_id');
+            // $table->index('demo_request_id'); // Created by foreignId
             $table->index('created_at');
         });
     }
