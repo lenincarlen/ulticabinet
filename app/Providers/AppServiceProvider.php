@@ -21,10 +21,14 @@ class AppServiceProvider extends ServiceProvider
     {
         // Configure mail settings from database
         try {
-            \App\Services\MailConfigService::configure();
+            // Skip if running in console and not a specific command that needs mail
+            // This prevents "relation cache does not exist" error during build/deployment
+            if (!app()->runningInConsole() || app()->runningUnitTests()) {
+                \App\Services\MailConfigService::configure();
+            }
         } catch (\Exception $e) {
             // Silently fail if database is not available (e.g., during migrations)
-            \Log::debug('Mail configuration skipped: ' . $e->getMessage());
+            // \Log::debug('Mail configuration skipped: ' . $e->getMessage());
         }
     }
 }
