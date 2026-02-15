@@ -50,8 +50,8 @@ class RoleSeeder extends Seeder
         $users = [
             // Admin
             [
-                'email' => 'admin@misterservices.com',
-                'password' => Hash::make('password'),
+                'email' => 'admin@multicabinet.com',
+                'password' => Hash::make('@password123'),
                 'email_verified_at' => now(),
                 'is_active' => true,
                 'role' => 'admin',
@@ -59,8 +59,8 @@ class RoleSeeder extends Seeder
        
             // Operadores
             [
-                'email' => 'operador@misterservices.com',
-                'password' => Hash::make('password'),
+                'email' => 'operador@ulticabinet.com',
+                'password' => Hash::make('@password123'),
                 'email_verified_at' => now(),
                 'is_active' => true,
                 'role' => 'operador',
@@ -68,8 +68,8 @@ class RoleSeeder extends Seeder
          
             // Vendedores
             [
-                'email' => 'vendedor@misterservices.com',
-                'password' => Hash::make('password'),
+                'email' => 'vendedor@ulticabinet.com',
+                'password' => Hash::make('@password123'),
                 'email_verified_at' => now(),
                 'is_active' => true,
                 'role' => 'vendedor',
