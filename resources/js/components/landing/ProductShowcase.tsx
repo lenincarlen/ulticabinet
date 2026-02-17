@@ -13,7 +13,150 @@ interface ProductShowcaseProps {
     solutions: Solution[];
 }
 
+// Soluciones estáticas para asegurar que se muestren todas
+const staticSolutions = [
+    {
+        id: "tablero-multiplataforma",
+        name: "Tablero Multiplataforma",
+        subtitle: "Gestión de Expedientes",
+        description: "Plataforma de Interoperabilidad General que permite la tramitación de casos y expedientes.",
+        image_path: "images/soluciones/1.png"
+    },
+    {
+        id: "portal-transaccional",
+        name: "Portal Transaccional",
+        subtitle: "Solicitudes en Tiempo Real",
+        description: "Portal que permite la creación de solicitudes en tiempo real para la validación.",
+        image_path: "images/soluciones/2.png"
+    },
+    {
+        id: "inteligencia-negocios",
+        name: "Inteligencia de Negocios",
+        subtitle: "Tableros de Control",
+        description: "Herramienta para la visualización de estadísticas en tiempo real.",
+        image_path: "images/soluciones/3.png"
+    },
+    {
+        id: "control-accesos",
+        name: "Control de Accesos",
+        subtitle: "Seguridad Institucional",
+        description: "Sistemas de control para determinar si una persona cumple con los requisitos.",
+        image_path: "images/soluciones/4.png"
+    },
+    {
+        id: "compras-licitaciones",
+        name: "Compras y Licitaciones",
+        subtitle: "Gestión de Proveedores",
+        description: "Plataforma de compras con interoperabilidad para clientes y suplidores.",
+        image_path: "images/soluciones/5.png"
+    },
+    {
+        id: "modulador-flujos",
+        name: "Modulador de Flujos",
+        subtitle: "BPM Visual",
+        description: "Modulador de flujos de manera visual con capacidad de creación de dependencias.",
+        image_path: "images/soluciones/6.png"
+    },
+    {
+        id: "chat-linea",
+        name: "Chat en Línea",
+        subtitle: "Soporte en Vivo",
+        description: "Sistema de chat en línea con operadores y representantes.",
+        image_path: "images/soluciones/7.png"
+    },
+    {
+        id: "notificaciones",
+        name: "Sistema de Notificaciones",
+        subtitle: "Comunicación Transversal",
+        description: "Envío de notificaciones y correos transversales a clientes y empleados.",
+        image_path: "images/soluciones/8.png"
+    },
+    {
+        id: "seguimiento-casos",
+        name: "Seguimiento de Casos",
+        subtitle: "Control de Mensajería",
+        description: "Sistema de seguimiento de casos y correspondencias.",
+        image_path: "images/soluciones/9.png"
+    },
+    {
+        id: "carga-descarga",
+        name: "Sistema de Carga y Descarga",
+        subtitle: "Automatización",
+        description: "Sistema de carga automatizado y desatendido.",
+        image_path: "images/soluciones/10.png"
+    },
+    {
+        id: "consulta-telefonica",
+        name: "Aplicación Telefónica",
+        subtitle: "Consulta y Asistencia",
+        description: "Aplicación de consulta y asistencia al usuario mediante llamadas telefónicas.",
+        image_path: "images/soluciones/11.png"
+    },
+    {
+        id: "repositorio-digital",
+        name: "Repositorio Digital",
+        subtitle: "Almacenamiento Seguro",
+        description: "Data Warehouse y repositorio central de documentos.",
+        image_path: "images/soluciones/12.png"
+    },
+    {
+        id: "gestor-multimedia",
+        name: "Gestor Multimedia",
+        subtitle: "Contenido Digital",
+        description: "Servicio de carga y reproducción de contenido multimedia.",
+        image_path: "images/soluciones/13.png"
+    },
+    {
+        id: "mensajeria-inmediata",
+        name: "Mensajería Inmediata",
+        subtitle: "Alta Importancia",
+        description: "Sistema de mensajería instantánea para casos de alta importancia.",
+        image_path: "images/soluciones/14.png"
+    },
+    {
+        id: "impresora-virtual",
+        name: "Impresora Virtual",
+        subtitle: "Ecología Digital",
+        description: "Impresora Virtual instalable para eliminar el consumo de papel.",
+        image_path: "images/soluciones/15.png"
+    },
+    {
+        id: "firma-digital",
+        name: "Firma Digital",
+        subtitle: "Seguridad Electrónica",
+        description: "Sistema de firma digital electrónica para reemplazar rúbricas físicas.",
+        image_path: "images/soluciones/16.png"
+    },
+    {
+        id: "digitalizacion-masiva",
+        name: "Digitalización Masiva",
+        subtitle: "Proyectos Llave en Mano",
+        description: "Sistema para digitalización masiva de documentos.",
+        image_path: "images/soluciones/17.png"
+    },
+    {
+        id: "repositorio-institucional",
+        name: "Repositorio Institucional",
+        subtitle: "Archivo Digital",
+        description: "Repositorio, depósito o archivo donde se almacenan la información digital.",
+        image_path: "images/soluciones/18.png"
+    },
+    {
+        id: "universidad-linea",
+        name: "Universidad en Línea",
+        subtitle: "E-Learning",
+        description: "Sistema para que alumnos y docentes puedan conectarse en un entorno virtual.",
+        image_path: "images/soluciones/19.png"
+    }
+];
+
 export default function ProductShowcase({ solutions = [] }: ProductShowcaseProps) {
+    // Usar soluciones estáticas si no vienen props o combinarlas si es necesario
+    const displaySolutions = staticSolutions.map(s => ({
+        ...s,
+        id: 0, // Mock ID for type compatibility if needed, or adjust types
+        slug: s.id
+    }));
     const getImageUrl = (path: string | undefined | null) => {
         if (!path) return null;
         if (path.startsWith('http')) return path;
@@ -51,7 +194,7 @@ export default function ProductShowcase({ solutions = [] }: ProductShowcaseProps
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {solutions.map((solution, index) => (
+                    {displaySolutions.map((solution, index) => (
                         <motion.div
                             key={solution.id}
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -85,7 +228,7 @@ export default function ProductShowcase({ solutions = [] }: ProductShowcaseProps
                     ))}
                 </div>
 
-                {solutions.length === 0 && (
+                {displaySolutions.length === 0 && (
                     <div className="text-center py-12 text-[#1d1d1d]/50">
                         <p>No hay soluciones disponibles en este momento.</p>
                     </div>
