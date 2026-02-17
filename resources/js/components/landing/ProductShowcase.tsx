@@ -1,9 +1,12 @@
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { Link } from "@inertiajs/react";
+import { ArrowLeft } from "lucide-react";
 
 interface Solution {
     id: number;
     name: string;
+    subtitle?: string; // Changed to match staticSolutions
     description?: string;
     image_path?: string;
     slug: string;
@@ -20,133 +23,133 @@ const staticSolutions = [
         name: "Tablero Multiplataforma",
         subtitle: "Gestión de Expedientes",
         description: "Plataforma de Interoperabilidad General que permite la tramitación de casos y expedientes.",
-        image_path: "images/soluciones/1.png"
+        image_path: "/images/soluciones/1.png"
     },
     {
         id: "portal-transaccional",
         name: "Portal Transaccional",
         subtitle: "Solicitudes en Tiempo Real",
         description: "Portal que permite la creación de solicitudes en tiempo real para la validación.",
-        image_path: "images/soluciones/2.png"
+        image_path: "/images/soluciones/2.png"
     },
     {
         id: "inteligencia-negocios",
         name: "Inteligencia de Negocios",
         subtitle: "Tableros de Control",
         description: "Herramienta para la visualización de estadísticas en tiempo real.",
-        image_path: "images/soluciones/3.png"
+        image_path: "/images/soluciones/3.png"
     },
     {
         id: "control-accesos",
         name: "Control de Accesos",
         subtitle: "Seguridad Institucional",
         description: "Sistemas de control para determinar si una persona cumple con los requisitos.",
-        image_path: "images/soluciones/4.png"
+        image_path: "/images/soluciones/4.png"
     },
     {
         id: "compras-licitaciones",
         name: "Compras y Licitaciones",
         subtitle: "Gestión de Proveedores",
         description: "Plataforma de compras con interoperabilidad para clientes y suplidores.",
-        image_path: "images/soluciones/5.png"
+        image_path: "/images/soluciones/5.png"
     },
     {
         id: "modulador-flujos",
         name: "Modulador de Flujos",
         subtitle: "BPM Visual",
         description: "Modulador de flujos de manera visual con capacidad de creación de dependencias.",
-        image_path: "images/soluciones/6.png"
+        image_path: "/images/soluciones/6.png"
     },
     {
         id: "chat-linea",
         name: "Chat en Línea",
         subtitle: "Soporte en Vivo",
         description: "Sistema de chat en línea con operadores y representantes.",
-        image_path: "images/soluciones/7.png"
+        image_path: "/images/soluciones/7.png"
     },
     {
         id: "notificaciones",
         name: "Sistema de Notificaciones",
         subtitle: "Comunicación Transversal",
         description: "Envío de notificaciones y correos transversales a clientes y empleados.",
-        image_path: "images/soluciones/8.png"
+        image_path: "/images/soluciones/8.png"
     },
     {
         id: "seguimiento-casos",
         name: "Seguimiento de Casos",
         subtitle: "Control de Mensajería",
         description: "Sistema de seguimiento de casos y correspondencias.",
-        image_path: "images/soluciones/9.png"
+        image_path: "/images/soluciones/9.png"
     },
     {
         id: "carga-descarga",
         name: "Sistema de Carga y Descarga",
         subtitle: "Automatización",
         description: "Sistema de carga automatizado y desatendido.",
-        image_path: "images/soluciones/10.png"
+        image_path: "/images/soluciones/10.png"
     },
     {
         id: "consulta-telefonica",
         name: "Aplicación Telefónica",
         subtitle: "Consulta y Asistencia",
         description: "Aplicación de consulta y asistencia al usuario mediante llamadas telefónicas.",
-        image_path: "images/soluciones/11.png"
+        image_path: "/images/soluciones/11.png"
     },
     {
         id: "repositorio-digital",
         name: "Repositorio Digital",
         subtitle: "Almacenamiento Seguro",
         description: "Data Warehouse y repositorio central de documentos.",
-        image_path: "images/soluciones/12.png"
+        image_path: "/images/soluciones/12.png"
     },
     {
         id: "gestor-multimedia",
         name: "Gestor Multimedia",
         subtitle: "Contenido Digital",
         description: "Servicio de carga y reproducción de contenido multimedia.",
-        image_path: "images/soluciones/13.png"
+        image_path: "/images/soluciones/13.png"
     },
     {
         id: "mensajeria-inmediata",
         name: "Mensajería Inmediata",
         subtitle: "Alta Importancia",
         description: "Sistema de mensajería instantánea para casos de alta importancia.",
-        image_path: "images/soluciones/14.png"
+        image_path: "/images/soluciones/14.png"
     },
     {
         id: "impresora-virtual",
         name: "Impresora Virtual",
         subtitle: "Ecología Digital",
         description: "Impresora Virtual instalable para eliminar el consumo de papel.",
-        image_path: "images/soluciones/15.png"
+        image_path: "/images/soluciones/15.png"
     },
     {
         id: "firma-digital",
         name: "Firma Digital",
         subtitle: "Seguridad Electrónica",
         description: "Sistema de firma digital electrónica para reemplazar rúbricas físicas.",
-        image_path: "images/soluciones/16.png"
+        image_path: "/images/soluciones/16.png"
     },
     {
         id: "digitalizacion-masiva",
         name: "Digitalización Masiva",
         subtitle: "Proyectos Llave en Mano",
         description: "Sistema para digitalización masiva de documentos.",
-        image_path: "images/soluciones/17.png"
+        image_path: "/images/soluciones/17.png"
     },
     {
         id: "repositorio-institucional",
         name: "Repositorio Institucional",
         subtitle: "Archivo Digital",
         description: "Repositorio, depósito o archivo donde se almacenan la información digital.",
-        image_path: "images/soluciones/18.png"
+        image_path: "/images/soluciones/18.png"
     },
     {
         id: "universidad-linea",
         name: "Universidad en Línea",
         subtitle: "E-Learning",
         description: "Sistema para que alumnos y docentes puedan conectarse en un entorno virtual.",
-        image_path: "images/soluciones/19.png"
+        image_path: "/images/soluciones/19.png"
     }
 ];
 
@@ -157,11 +160,8 @@ export default function ProductShowcase({ solutions = [] }: ProductShowcaseProps
         id: 0, // Mock ID for type compatibility if needed, or adjust types
         slug: s.id
     }));
-    const getImageUrl = (path: string | undefined | null) => {
-        if (!path) return null;
-        if (path.startsWith('http')) return path;
-        return `/storage/${path}`;
-    };
+
+    // getImageUrl no longer needed as static solutions use direct paths
 
     return (
         <section id="solutions" className="w-full py-12 md:py-24 lg:py-32 bg-white relative overflow-hidden">
@@ -193,35 +193,36 @@ export default function ProductShowcase({ solutions = [] }: ProductShowcaseProps
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {displaySolutions.map((solution, index) => (
                         <motion.div
-                            key={solution.id}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            key={solution.slug} // Use slug as key
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            whileHover={{ y: -5 }}
+                            transition={{ duration: 0.5, delay: index * 0.05 }}
                         >
-                            <Card
-                                className="group flex flex-col items-center justify-center p-8 transition-all bg-white border-[#e8e9eb] hover:border-[#0037ff]/30 hover:shadow-xl hover:shadow-[#0037ff]/10 min-h-[220px]"
-                            >
-                                <div className="mb-6 h-16 w-full flex items-center justify-center">
-                                    {solution.image_path ? (
-                                        <img
-                                            src={getImageUrl(solution.image_path) || ''}
-                                            alt={solution.name}
-                                            className="h-full w-auto object-contain max-w-[200px]"
-                                        />
-                                    ) : (
-                                        <span className="text-xl font-bold text-[#1d1d1d] group-hover:text-[#0037ff] transition-colors">{solution.name}</span>
-                                    )}
+                            <Card className="h-full overflow-hidden bg-white border-[#e8e9eb] hover:shadow-xl hover:border-[#0037ff]/30 transition-all group flex flex-col">
+                                <div className="aspect-video bg-[#f4f5f7] p-8 flex items-center justify-center relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-[#0037ff]/0 group-hover:bg-[#0037ff]/5 transition-colors duration-500" />
+                                    <img
+                                        src={solution.image_path}
+                                        alt={solution.name}
+                                        className="w-full h-full object-contain drop-shadow-lg transform group-hover:scale-110 transition-transform duration-500"
+                                    />
                                 </div>
+                                <div className="p-8 flex-1 flex flex-col">
+                                    <div className="mb-4">
+                                        <h3 className="text-2xl font-black text-[#1d1d1d] group-hover:text-[#0037ff] transition-colors">{solution.name}</h3>
+                                        <p className="text-sm font-bold text-[#0037ff] uppercase tracking-wider">{solution.subtitle}</p>
+                                    </div>
+                                    {/* Description hidden as requested */}
+                                    <div className="flex-1"></div>
 
-                                <div className="text-center">
-                                    <h3 className="text-sm font-bold text-[#1d1d1d]/80 group-hover:text-[#1d1d1d] leading-tight transition-colors">
-                                        {solution.description || solution.name}
-                                    </h3>
+                                    <Link href="/solicitar-demo" className="text-sm font-bold text-[#1d1d1d] hover:text-[#0037ff] flex items-center gap-2 group/link mt-4">
+                                        Solicitar información
+                                        <span className="group-hover/link:translate-x-1 transition-transform">→</span>
+                                    </Link>
                                 </div>
                             </Card>
                         </motion.div>
