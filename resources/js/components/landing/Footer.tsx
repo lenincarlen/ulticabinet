@@ -104,13 +104,14 @@ export default function Footer() {
             © {new Date().getFullYear()} {companyName}. Todos los derechos reservados.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="text-[#e8e9eb]/60 hover:text-[#0037ff] transition-colors p-2 bg-white/5 rounded-full">
+            <a target="blank" href="https://www.facebook.com/profile.php?id=61582866950512"  className="text-[#e8e9eb]/60 hover:text-[#0037ff] transition-colors p-2 bg-white/5 rounded-full">
               <Facebook className="h-5 w-5" />
             </a>
-            <a href="#" className="text-[#e8e9eb]/60 hover:text-[#0037ff] transition-colors p-2 bg-white/5 rounded-full">
+            <a target="blank" href="https://x.com/ulticabinet_" className="text-[#e8e9eb]/60 hover:text-[#0037ff] transition-colors p-2 bg-white/5 rounded-full">
               <Twitter className="h-5 w-5" />
+
             </a>
-            <a href="#" className="text-[#e8e9eb]/60 hover:text-pink-500 transition-colors p-2 bg-white/5 rounded-full">
+            <a target="blank" href="https://www.instagram.com/ulticabinet_" className="text-[#e8e9eb]/60 hover:text-pink-500 transition-colors p-2 bg-white/5 rounded-full">
               <Instagram className="h-5 w-5" />
             </a>
           </div>

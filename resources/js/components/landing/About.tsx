@@ -23,18 +23,16 @@ export default function About() {
           >
             <div className="relative w-full max-w-md">
               <div className="relative rounded-3xl">
-                <div className="absolute inset-0 rounded-3xl opacity-20" style={{
-                  backgroundSize: '30px 30px'
-                }} />
-                <div className="relative z-10 overflow-hidden rounded-2xl ring-1 ring-[#1d1d1d]/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+                
+                <div className="relative z-10 overflow-hidden ">
                   <motion.img
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.5 }}
-                    src="images/Foto_Emplados_1.png"
+                    src="images/Foto1.png"
                     alt="Equipo de transformación digital"
                     className="h-[400px] w-full object-cover"
                   />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl" />
+                  <div className="absolute inset-0  " />
                 </div>
               </div>
             </div>
