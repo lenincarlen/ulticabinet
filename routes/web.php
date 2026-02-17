@@ -26,6 +26,155 @@ Route::get('/soluciones/all', function () {
     return Inertia::render('solutions/all');
 })->name('solutions.all');
 
+Route::get('/soluciones/{id}', function ($id) {
+    // Definir soluciones estáticas idénticas a ProductShowcase.tsx
+    $solutions = [
+        [
+            "id" => "tablero-multiplataforma",
+            "name" => "Tablero Multiplataforma",
+            "subtitle" => "Gestión de Expedientes",
+            "description" => "Plataforma de Interoperabilidad General que permite la tramitación de casos y expedientes para la gestión, asignación, consulta y control visualización de los expedientes de acuerdo al nivel de seguridad del usuario.",
+            "image_path" => "/images/soluciones/1.png"
+        ],
+        [
+            "id" => "portal-transaccional",
+            "name" => "Portal Transaccional",
+            "subtitle" => "Solicitudes en Tiempo Real",
+            "description" => "Portal que permite la creación de solicitudes en tiempo real para la validación por parte de la institución con capacidad para adaptarse y personalizarse utilizando plantillas.",
+            "image_path" => "/images/soluciones/2.png"
+        ],
+        [
+            "id" => "inteligencia-negocios",
+            "name" => "Inteligencia de Negocios",
+            "subtitle" => "Tableros de Control",
+            "description" => "Herramienta para la visualización de estadísticas en tiempo real de los casos y procesos para estimar y determinar el comportamiento utilizando tableros de control.",
+            "image_path" => "/images/soluciones/3.png"
+        ],
+        [
+            "id" => "control-accesos",
+            "name" => "Control de Accesos",
+            "subtitle" => "Seguridad Institucional",
+            "description" => "Sistemas de control para determinar si una persona cumple con los requisitos establecidos por la organización para permitir el ingreso, enlazando en tiempo real con entidades.",
+            "image_path" => "/images/soluciones/4.png"
+        ],
+        [
+            "id" => "compras-licitaciones",
+            "name" => "Compras y Licitaciones",
+            "subtitle" => "Gestión de Proveedores",
+            "description" => "Plataforma de compras con interoperabilidad para clientes y suplidores por rubros, consolidación de propuestas y depuración de oferentes.",
+            "image_path" => "/images/soluciones/5.png"
+        ],
+        [
+            "id" => "modulador-flujos",
+            "name" => "Modulador de Flujos",
+            "subtitle" => "BPM Visual",
+            "description" => "Modulador de flujos de manera visual con capacidad de creación de dependencias, requisitos, gestiones, asignaciones y reglas de negocio.",
+            "image_path" => "/images/soluciones/6.png"
+        ],
+        [
+            "id" => "chat-linea",
+            "name" => "Chat en Línea",
+            "subtitle" => "Soporte en Vivo",
+            "description" => "Sistema de chat en línea con operadores y representantes, con capacidad de cargar imágenes y reportar inconvenientes en línea como parte de la experiencia.",
+            "image_path" => "/images/soluciones/7.png"
+        ],
+        [
+            "id" => "notificaciones",
+            "name" => "Sistema de Notificaciones",
+            "subtitle" => "Comunicación Transversal",
+            "description" => "Envío de notificaciones y correos transversales a clientes y empleados, incluyendo avisos omnicanales sobre el cambio de estado en las solicitudes.",
+            "image_path" => "/images/soluciones/8.png"
+        ],
+        [
+            "id" => "seguimiento-casos",
+            "name" => "Seguimiento de Casos",
+            "subtitle" => "Control de Mensajería",
+            "description" => "Sistema de seguimiento de casos y correspondencias que permite tomar fotos y cambiar estados automáticamente, con geolocalización para el control de mensajeros.",
+            "image_path" => "/images/soluciones/9.png"
+        ],
+        [
+            "id" => "carga-descarga",
+            "name" => "Sistema de Carga y Descarga",
+            "subtitle" => "Automatización",
+            "description" => "Sistema de carga automatizado y desatendido que replica el funcionamiento humano, con reconocimiento automático de documentos basado en perfiles de indexación inteligente.",
+            "image_path" => "/images/soluciones/10.png"
+        ],
+        [
+            "id" => "consulta-telefonica",
+            "name" => "Aplicación Telefónica",
+            "subtitle" => "Consulta y Asistencia",
+            "description" => "Aplicación de consulta y asistencia al usuario mediante llamadas telefónicas a la central, con reenvío inteligente a personal de soporte.",
+            "image_path" => "/images/soluciones/11.png"
+        ],
+        [
+            "id" => "repositorio-digital",
+            "name" => "Repositorio Digital",
+            "subtitle" => "Almacenamiento Seguro",
+            "description" => "Data Warehouse y repositorio central de documentos que funciona On Premise y en la nube, con sistema de almacenamiento y digitalización.",
+            "image_path" => "/images/soluciones/12.png"
+        ],
+        [
+            "id" => "gestor-multimedia",
+            "name" => "Gestor Multimedia",
+            "subtitle" => "Contenido Digital",
+            "description" => "Servicio de carga y reproducción de contenido multimedia (fotos, videos, audios) y gestión de carga y descarga sin límite de espacio.",
+            "image_path" => "/images/soluciones/13.png"
+        ],
+        [
+            "id" => "mensajeria-inmediata",
+            "name" => "Mensajería Inmediata",
+            "subtitle" => "Alta Importancia",
+            "description" => "Sistema de mensajería instantánea para casos de alta importancia, permitiendo el envío y distribución de notas automatizadas basadas en el expediente.",
+            "image_path" => "/images/soluciones/14.png"
+        ],
+        [
+            "id" => "impresora-virtual",
+            "name" => "Impresora Virtual",
+            "subtitle" => "Ecología Digital",
+            "description" => "Impresora Virtual instalable para eliminar el consumo de papel y generar documentos electrónicos que se cargan automáticamente al repositorio.",
+            "image_path" => "/images/soluciones/15.png"
+        ],
+        [
+            "id" => "firma-digital",
+            "name" => "Firma Digital",
+            "subtitle" => "Seguridad Electrónica",
+            "description" => "Sistema de firma digital electrónica para reemplazar rúbricas físicas, complementado con una bóveda de seguridad que requiere token de acceso.",
+            "image_path" => "/images/soluciones/16.png"
+        ],
+        [
+            "id" => "digitalizacion-masiva",
+            "name" => "Digitalización Masiva",
+            "subtitle" => "Proyectos Llave en Mano",
+            "description" => "Sistema para digitalización masiva de documentos con entrega de proyectos llave en mano o entrenamiento a usuarios.",
+            "image_path" => "/images/soluciones/17.png"
+        ],
+        [
+            "id" => "repositorio-institucional",
+            "name" => "Repositorio Institucional",
+            "subtitle" => "Archivo Digital",
+            "description" => "Repositorio, depósito o archivo donde se almacenan, distribuyen y mantienen la información digital de la institución.",
+            "image_path" => "/images/soluciones/18.png"
+        ],
+        [
+            "id" => "universidad-linea",
+            "name" => "Universidad en Línea",
+            "subtitle" => "E-Learning",
+            "description" => "Sistema para que alumnos y docentes puedan conectarse en un entorno virtual para un aprendizaje colaborativo y flexible.",
+            "image_path" => "/images/soluciones/19.png"
+        ]
+    ];
+
+    $solution = collect($solutions)->firstWhere('id', $id);
+
+    if (!$solution) {
+        abort(404);
+    }
+
+    return Inertia::render('solutions/show', [
+        'solution' => $solution
+    ]);
+})->name('solutions.show');
+
 // Public demo request routes
 Route::get('/solicitar-demo', [\App\Http\Controllers\DemoRequestController::class, 'create'])->name('demo.create');
 Route::post('/solicitar-demo', [\App\Http\Controllers\DemoRequestController::class, 'store'])->name('demo.store');

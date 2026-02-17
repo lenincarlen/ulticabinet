@@ -202,29 +202,31 @@ export default function ProductShowcase({ solutions = [] }: ProductShowcaseProps
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.05 }}
                         >
-                            <Card className="h-full overflow-hidden bg-white border-[#e8e9eb] hover:shadow-xl hover:border-[#0037ff]/30 transition-all group flex flex-col">
-                                <div className="aspect-video bg-[#f4f5f7] p-8 flex items-center justify-center relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-[#0037ff]/0 group-hover:bg-[#0037ff]/5 transition-colors duration-500" />
-                                    <img
-                                        src={solution.image_path}
-                                        alt={solution.name}
-                                        className="w-full h-full object-contain drop-shadow-lg transform group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-8 flex-1 flex flex-col">
-                                    <div className="mb-4">
-                                        <h3 className="text-2xl font-black text-[#1d1d1d] group-hover:text-[#0037ff] transition-colors">{solution.name}</h3>
-                                        <p className="text-sm font-bold text-[#0037ff] uppercase tracking-wider">{solution.subtitle}</p>
+                            <Link href={`/soluciones/${solution.id}`} className="block h-full">
+                                <Card className="h-full overflow-hidden bg-white border-[#e8e9eb] hover:shadow-xl hover:border-[#0037ff]/30 transition-all group flex flex-col cursor-pointer">
+                                    <div className="aspect-video bg-[#f4f5f7] p-8 flex items-center justify-center relative overflow-hidden">
+                                        <div className="absolute inset-0 bg-[#0037ff]/0 group-hover:bg-[#0037ff]/5 transition-colors duration-500" />
+                                        <img
+                                            src={solution.image_path}
+                                            alt={solution.name}
+                                            className="w-full h-full object-contain drop-shadow-lg transform group-hover:scale-110 transition-transform duration-500"
+                                        />
                                     </div>
-                                    {/* Description hidden as requested */}
-                                    <div className="flex-1"></div>
+                                    <div className="p-8 flex-1 flex flex-col">
+                                        <div className="mb-4">
+                                            <h3 className="text-2xl font-black text-[#1d1d1d] group-hover:text-[#0037ff] transition-colors">{solution.name}</h3>
+                                            <p className="text-sm font-bold text-[#0037ff] uppercase tracking-wider">{solution.subtitle}</p>
+                                        </div>
+                                        {/* Description hidden as requested */}
+                                        <div className="flex-1"></div>
 
-                                    <Link href="/solicitar-demo" className="text-sm font-bold text-[#1d1d1d] hover:text-[#0037ff] flex items-center gap-2 group/link mt-4">
-                                        Solicitar información
-                                        <span className="group-hover/link:translate-x-1 transition-transform">→</span>
-                                    </Link>
-                                </div>
-                            </Card>
+                                        <div className="text-sm font-bold text-[#1d1d1d] hover:text-[#0037ff] flex items-center gap-2 group/link mt-4">
+                                            Ver detalles
+                                            <span className="group-hover/link:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                    </div>
+                                </Card>
+                            </Link>
                         </motion.div>
                     ))}
                 </div>
