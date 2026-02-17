@@ -24,7 +24,7 @@ export default function Hero() {
 
   return (
     <section
-      className="w-full min-h-screen py-12 md:py-24 lg:py-32 bg-white relative overflow-hidden"
+      className="w-full mt-10 py-12 md:py-24 lg:py-32 bg-white relative overflow-hidden"
       style={bannerUrl ? {
         backgroundImage: `linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)), url(${bannerUrl})`,
         backgroundSize: 'cover',

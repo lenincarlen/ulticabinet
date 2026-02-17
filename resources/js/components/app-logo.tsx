@@ -17,7 +17,7 @@ export default function AppLogo() {
 
     return (
         <>
-            <div className="flex aspect-square size-auto items-center justify-center  rounded-full  overflow-hidden  ">
+            <div className="flex aspect-square w-full h-full items-center justify-center  rounded-full  overflow-hidden  ">
                 {!imageError ? (
                     <img
                         src={logoPath}

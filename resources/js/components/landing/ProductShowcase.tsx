@@ -162,7 +162,7 @@ export default function ProductShowcase({ solutions = [] }: ProductShowcaseProps
     // getImageUrl no longer needed as static solutions use direct paths
 
     return (
-        <section id="solutions" className="w-full py-12 md:py-24 lg:py-32 bg-white relative overflow-hidden">
+        <section id="solutions" className="w-full py-12   bg-white relative overflow-hidden">
             {/* Decorative Background Elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#0037ff]/5 rounded-full blur-[100px]" />

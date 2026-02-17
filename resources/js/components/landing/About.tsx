@@ -30,7 +30,7 @@ export default function About() {
                   <motion.img
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.5 }}
-                    src="images/first-seccion.png"
+                    src="images/Foto_Emplados_1.png"
                     alt="Equipo de transformación digital"
                     className="h-[400px] w-full object-cover"
                   />

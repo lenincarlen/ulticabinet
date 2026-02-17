@@ -28,7 +28,7 @@ export default function Welcome({ canRegister = true, solutions = [] }: WelcomeP
 
   return (
     <ThemeProvider>
-      <Head title="Mister Services RD - Servicios Técnicos a Domicilio">
+      <Head title="UltiCabinet- Soluciones que se adaptan a ti">
         <link rel="preconnect" href="https://fonts.bunny.net" />
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
       </Head>
@@ -38,12 +38,11 @@ export default function Welcome({ canRegister = true, solutions = [] }: WelcomeP
 
         <main className="flex-1">
           <Hero />
+              <About />
           <ProductShowcase solutions={solutions} />
-          <About />
+      
           <ReasonsToLove />
-          <About />
-          <ReasonsToLove />
-          <Offers />
+         
           <Testimonials />
         </main>
 

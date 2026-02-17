@@ -186,7 +186,7 @@
         <div class="header">
             <div class="company-info">
                 <div class="company-name">{{ company_name() }}</div>
-                <div class="company-tagline">Servicios Técnicos a Domicilio</div>
+                <!-- <div class="company-tagline">Servicios Técnicos a Domicilio</div> -->
             </div>
             <div class="invoice-info">
                 <div class="invoice-title">FACTURA</div>
