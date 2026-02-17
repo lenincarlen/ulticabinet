@@ -23,11 +23,17 @@ class DashboardController extends Controller
 
     
 
-    public function getKpis() { return response()->json(['total_sales' => 0, 'open_orders' => 0]); }
-    public function getOrdersTrend() { return response()->json([]); }
-    public function getRevenueMonthly() { return response()->json([]); }
-    public function getTopServices() { return response()->json([]); }
-    public function getTechnicianPerformance() { return response()->json([]); }
+    public function getKpis(Request $request) { 
+        // Simple counts for now, can be filtered by date if needed
+        $demoRequestsCount = \App\Models\DemoRequest::count();
+        $customersCount = \App\Models\Customer::count();
+
+        return response()->json([
+            'demo_requests' => $demoRequestsCount,
+            'customers' => $customersCount,
+        ]); 
+    }
+
     public function getAlerts() { 
         return response()->json([
             'unassigned_orders' => 0,
@@ -36,6 +42,7 @@ class DashboardController extends Controller
             'upcoming_appointments' => []
         ]); 
     }
+
     public function getTodayAppointments() { return response()->json([]); }
     public function getCashSummary() { return response()->json([]); }
 }
