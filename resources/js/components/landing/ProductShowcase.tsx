@@ -157,7 +157,6 @@ export default function ProductShowcase({ solutions = [] }: ProductShowcaseProps
     // Usar soluciones estáticas si no vienen props o combinarlas si es necesario
     const displaySolutions = staticSolutions.map(s => ({
         ...s,
-        id: 0, // Mock ID for type compatibility if needed, or adjust types
         slug: s.id
     }));
 
