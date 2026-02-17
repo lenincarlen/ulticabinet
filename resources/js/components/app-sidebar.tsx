@@ -23,11 +23,12 @@ import {
     Users,
     X
 } from 'lucide-react';
-import AppLogo from './app-logo';
+import LogoAppAdmin from './app-logo-admin';
 import { type SharedData } from '@/types';
 import { useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { title } from 'process';
+import AppLogoAdmin from './app-logo-admin';
 
 // Definir items del menú con roles permitidos
 interface NavItemWithRoles extends NavItem {
@@ -246,7 +247,7 @@ export function AppSidebar() {
             <div className="flex h-16 items-center border-b border-gray-700 px-4 bg-[#1a202c]">
                 {!isCollapsed && (
                     <Link href={dashboard()} className="flex items-center gap-2 flex-1">
-                        <AppLogo />
+                        <AppLogoAdmin />
                     </Link>
                 )}
                 <button

@@ -146,7 +146,7 @@ export default function CustomersIndex({ customers = [] }: Props) {
                                         <th className="px-4 py-3 text-left text-sm font-medium">Cliente</th>
                                         <th className="px-4 py-3 text-left text-sm font-medium">Contacto</th>
                                         <th className="px-4 py-3 text-left text-sm font-medium">Dirección</th>
-                                        <th className="px-4 py-3 text-left text-sm font-medium">Órdenes</th>
+
                                         <th className="px-4 py-3 text-left text-sm font-medium">Acciones</th>
                                     </tr>
                                 </thead>

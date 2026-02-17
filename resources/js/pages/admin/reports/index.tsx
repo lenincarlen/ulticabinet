@@ -15,31 +15,24 @@ import {
 export default function ReportsIndex() {
     const reports = [
         {
-            title: 'Reportes de Ventas',
-            description: 'Análisis de ventas por período, servicio y método de pago',
-           
+            title: 'Reportes de Citas',
+            description: 'Análisis de citas por período, servicio y método de pago',
+
             color: 'text-green-600',
             bgColor: 'bg-green-50',
             href: '/reportes/ventas',
         },
-         
-         
+
+
         {
             title: 'Reportes de Clientes',
             description: 'Clientes nuevos, recurrentes y top clientes',
-          
+
             color: 'text-pink-600',
             bgColor: 'bg-pink-50',
             href: '/reportes/clientes',
         },
-        {
-            title: 'Reportes de Ingresos',
-            description: 'Ingresos totales por ventas y servicios por período',
-           
-            color: 'text-teal-600',
-            bgColor: 'bg-teal-50',
-            href: '/reportes/ingresos',
-        },
+
     ];
 
     return (
@@ -57,11 +50,11 @@ export default function ReportsIndex() {
                 {/* Reports Grid */}
                 <div className="grid  md:grid-cols-2 lg:grid-cols-3 gap-2">
                     {reports.map((report) => {
-                        
+
                         return (
-                            <Card key={report.title} className="p-6  bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 ">
+                            <Card key={report.title} className="p-6 ">
                                 <div className="flex items-start gap-">
-                                   
+
                                     <div className="flex-1">
                                         <h3 className="font-semibold text-lg mb-2">{report.title}</h3>
                                         <p className="text-sm text-muted-foreground mb-4">

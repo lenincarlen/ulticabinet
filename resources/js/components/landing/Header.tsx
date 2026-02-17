@@ -47,7 +47,6 @@ export default function Header({ isAuthenticated, canRegister = true }: HeaderPr
           <NavLink href="/nosotros">Nosotros</NavLink>
           <NavLink href="/soluciones">Soluciones</NavLink>
           <NavLink href="/blog">Blog</NavLink>
-          <NavLink href="/#pricing">Planes</NavLink>
           <NavLink href="/#reviews">Clientes</NavLink>
           <NavLink href="/#contact">Contacto</NavLink>
         </nav>
