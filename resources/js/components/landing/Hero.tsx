@@ -4,6 +4,105 @@ import { usePage } from "@inertiajs/react";
 import { SharedData } from "@/types";
 import ParticlesBackground from "./ParticlesBackground";
 import { motion } from "framer-motion";
+import { Card } from "@/components/ui/card";
+
+const solutions = [
+  {
+    id: "tablero-multiplataforma",
+    title: "Tablero Multiplataforma",
+    image: "/images/soluciones/1.png"
+  },
+  {
+    id: "portal-transaccional",
+    title: "Portal Transaccional",
+    image: "/images/soluciones/2.png"
+  },
+  {
+    id: "inteligencia-negocios",
+    title: "Inteligencia de Negocios",
+    image: "/images/soluciones/3.png"
+  },
+  {
+    id: "control-accesos",
+    title: "Control de Accesos",
+    image: "/images/soluciones/4.png"
+  },
+  {
+    id: "compras-licitaciones",
+    title: "Compras y Licitaciones",
+    image: "/images/soluciones/5.png"
+  },
+  {
+    id: "modulador-flujos",
+    title: "Modulador de Flujos",
+    image: "/images/soluciones/6.png"
+  },
+  {
+    id: "chat-linea",
+    title: "Chat en Línea",
+    image: "/images/soluciones/7.png"
+  },
+  {
+    id: "notificaciones",
+    title: "Sistema de Notificaciones",
+    image: "/images/soluciones/8.png"
+  },
+  {
+    id: "seguimiento-casos",
+    title: "Seguimiento de Casos",
+    image: "/images/soluciones/9.png"
+  },
+  {
+    id: "carga-descarga",
+    title: "Sistema de Carga y Descarga",
+    image: "/images/soluciones/10.png"
+  },
+  {
+    id: "consulta-telefonica",
+    title: "Aplicación Telefónica",
+    image: "/images/soluciones/11.png"
+  },
+  {
+    id: "repositorio-digital",
+    title: "Repositorio Digital",
+    image: "/images/soluciones/12.png"
+  },
+  {
+    id: "gestor-multimedia",
+    title: "Gestor Multimedia",
+    image: "/images/soluciones/13.png"
+  },
+  {
+    id: "mensajeria-inmediata",
+    title: "Mensajería Inmediata",
+    image: "/images/soluciones/14.png"
+  },
+  {
+    id: "impresora-virtual",
+    title: "Impresora Virtual",
+    image: "/images/soluciones/15.png"
+  },
+  {
+    id: "firma-digital",
+    title: "Firma Digital",
+    image: "/images/soluciones/16.png"
+  },
+  {
+    id: "digitalizacion-masiva",
+    title: "Digitalización Masiva",
+    image: "/images/soluciones/17.png"
+  },
+  {
+    id: "repositorio-institucional",
+    title: "Repositorio Institucional",
+    image: "/images/soluciones/18.png"
+  },
+  {
+    id: "universidad-linea",
+    title: "Universidad en Línea",
+    image: "/images/soluciones/19.png"
+  }
+];
 
 export default function Hero() {
   const { siteSettings } = usePage<SharedData>().props;
@@ -119,39 +218,35 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Panel derecho - Visual abstracto */}
+          {/* Panel derecho - Soluciones Grid */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="relative hidden lg:block"
+            className="relative hidden lg:block h-[600px] overflow-hidden rounded-2xl border border-[#e8e9eb] bg-white/50 backdrop-blur-sm p-6 shadow-2xl"
           >
-            {/* Abstract decorative elements - Updated for light theme */}
-            <div className="absolute -top-20 -right-20 h-96 w-96 rounded-full bg-[#98d6fc]/30 blur-3xl filter animate-pulse" />
-            <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-[#00a6e0]/20 blur-3xl filter animate-pulse delay-1000" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#f8f9fa] to-white/50 -z-10" />
 
-            {/* Glass Card */}
-            <div className="relative z-10 rounded-2xl border border-[#e8e9eb] bg-white/80 p-8 backdrop-blur-md shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#f8f9fa] to-white rounded-2xl -z-10" />
-              <div className="space-y-4">
-                <div className="h-4 w-3/4 rounded bg-[#e8e9eb]" />
-                <div className="h-4 w-1/2 rounded bg-[#e8e9eb]" />
-                <div className="mt-8 grid grid-cols-2 gap-4">
-                  <div className="h-32 rounded-lg bg-[#98d6fc]/50 animate-pulse" />
-                  <div className="h-32 rounded-lg bg-[#00a6e0]/30 animate-pulse delay-75" />
-                </div>
-                {/* Stats row */}
-                <div className="pt-6 flex justify-between items-center border-t border-[#e8e9eb] mt-6">
-                  <div>
-                    <div className="h-8 w-16 bg-[#0037ff]/10 rounded mb-1" />
-                    <div className="h-3 w-20 bg-[#e8e9eb] rounded" />
-                  </div>
-                  <div>
-                    <div className="h-8 w-16 bg-[#00a6e0]/10 rounded mb-1" />
-                    <div className="h-3 w-20 bg-[#e8e9eb] rounded" />
-                  </div>
-                </div>
-              </div>
+            {/* Grid with auto-scroll effect or just scrollable */}
+            <div className="h-full overflow-y-auto pr-2 custom-scrollbar grid grid-cols-2 md:grid-cols-3 gap-4 pb-4">
+              {solutions.map((sol, i) => (
+                <motion.div
+                  key={sol.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.1 * i }}
+                  className="group"
+                >
+                  <Card className="h-28 flex items-center justify-center p-4 bg-white border-[#e8e9eb] hover:shadow-lg hover:border-[#0037ff]/30 transition-all cursor-default">
+                    <img
+                      src={sol.image}
+                      alt={sol.title}
+                      className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                      title={sol.title}
+                    />
+                  </Card>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
