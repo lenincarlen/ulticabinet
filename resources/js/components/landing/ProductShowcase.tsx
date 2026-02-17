@@ -4,7 +4,7 @@ import { Link } from "@inertiajs/react";
 import { ArrowLeft } from "lucide-react";
 
 interface Solution {
-    id: number;
+    id: number | string; // Allow string IDs
     name: string;
     subtitle?: string; // Changed to match staticSolutions
     description?: string;
@@ -13,7 +13,7 @@ interface Solution {
 }
 
 interface ProductShowcaseProps {
-    solutions: Solution[];
+    solutions?: Solution[];
 }
 
 // Soluciones estáticas para asegurar que se muestren todas
