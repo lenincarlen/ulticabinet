@@ -43,7 +43,7 @@ export default function Header({ isAuthenticated, canRegister = true }: HeaderPr
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative h-12 w-12">
+          <div className="relative h-24 w-54">
             <AppLogo />
           </div>
         </Link>
